@@ -7,9 +7,9 @@
 ---
 
 ### 10/6/24:
-To start with kaboom I started with the base for kaboom and where my game will be
-
-
+To start with kaboom I started with the base for kaboom and where my game will be using the src provided by kaboom on their website
+![start](kaboomstart.png)  
+I then
 ### X/X/XX:
 * Text
 
