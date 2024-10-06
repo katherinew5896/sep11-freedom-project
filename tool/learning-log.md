@@ -7,17 +7,8 @@
 ---
 
 ### 10/6/24:
-To start with three.js we need to use these three main components to start with a base
-`````
-import * as THREE from 'three';
+To start with kaboom I started with the base for kaboom and where my game will be
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-`````
 
 ### X/X/XX:
 * Text
