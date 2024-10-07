@@ -7,9 +7,9 @@
 ---
 
 ### 10/6/24:
-To start with kaboom I started with the base for kaboom and where my game will be using the src provided by kaboom on their website into my own html on [jsbin](jsbin.com) (jsbin.com)[jsbin]
+To start with kaboom I started with the base for kaboom and where my game will be using the src provided by kaboom on their website into my own html on jsbin.
 ![start](kaboomstart.png)  
-I then
+I then started to change some code i had copied from an
 ### X/X/XX:
 * Text
 
