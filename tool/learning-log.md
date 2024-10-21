@@ -51,13 +51,11 @@ onKeyPress("space", () => {
 `````
 This is the basic to add a sprite, you can change the name and give it a different position.
 Another code I learned was adding different sprite together and making shapes.
-'''''js
-	add([
-    pos(80, 240),
-    rect(700, 20),
-    outline(4),
-    area(),
-])
+`````js
+add([ pos(80, 240), 
+rect(700, 20),
+outline(4), 
+area(), ])
 `````
 `````js
 	add([
