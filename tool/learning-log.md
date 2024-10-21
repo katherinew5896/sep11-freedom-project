@@ -63,7 +63,7 @@ area(), ])
     circle(16),
 ])
 ``````
-As you can see i add rectangle and a cricle.
+As you can see i add rectangle and a cricle using the shape name and putting it using position.
 So with all these together I made 
 `````js
 kaboom()
@@ -113,7 +113,7 @@ for (let i = 0; i < 3; i++) {
 }
 `````
 ![k](kaboom.js.png)
-This is the thing I made from using all the code, I will use more of these code for the future and hone my skills farther. So for the freedom project I will be ready to make a game.
+This is the thing I made from using all the code, I will use more of these code for the future and hone my skills further. So for the freedom project I will be ready to make a game with some prior knowledge.
 
 <!-- 
 * Links you used today (websites, videos, etc)
