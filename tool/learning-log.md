@@ -112,7 +112,7 @@ for (let i = 0; i < 3; i++) {
 ])
 }
 `````
-![k]()
+![k](kaboom.js.png)
 
 <!-- 
 * Links you used today (websites, videos, etc)
