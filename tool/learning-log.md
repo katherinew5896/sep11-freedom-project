@@ -9,7 +9,19 @@
 ### 10/6/24:
 To start with kaboom I started with the base for kaboom and where my game will be using the src provided by kaboom on their website into my own html on jsbin.
 ![start](kaboomstart.png)  
-I then started to change some code i had copied from an
+The code for this is:
+`````
+<script type="module">
+
+import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
+
+kaboom();
+
+]);
+
+</script>
+`````
+You would add the code to your html in the script. I then started to change some code I had copied from the Kaboom add.
 
 ### 10/20/24
 The first thing I learned was how to add sprite, the code for this is: 
