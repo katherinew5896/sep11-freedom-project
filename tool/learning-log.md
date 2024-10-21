@@ -63,7 +63,56 @@ area(), ])
     circle(16),
 ])
 ``````
+As you can see i add rectangle and a cricle.
+So with all these together I made 
+`````js
+kaboom()
 
+loadSprite("bean", "/sprites/ghosty.png")
+loadSprite("ghosty", "/sprites/bean.png")
+
+
+const player = add([
+	sprite("bean"), 
+	pos(200, 200),
+	rotate(0),    
+	anchor("center"),
+])
+
+
+player.onUpdate(() => {
+
+	player.angle += 120 * dt()
+})
+
+// Add multiple game objects
+for (let i = 0; i < 3; i++) {
+
+
+	const x = rand(0, width())
+	const y = rand(0, height())
+
+	const ghost = add([
+		sprite("ghosty"),
+		pos(x, y),
+	])
+	add([
+    pos(80, 240),
+    rect(700, 20),
+    outline(4),
+    area(),
+])
+	add([
+    pos(350, 200),
+    circle(16),
+])
+	add([
+    pos(500, 200),
+    circle(16),
+])
+}
+`````
+![k]()
 
 <!-- 
 * Links you used today (websites, videos, etc)
