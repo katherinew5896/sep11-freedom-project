@@ -40,6 +40,7 @@ onKeyPress("space", () => {
 This is the basic to add a sprite, you can change the name and give it a different position.
 
 
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
