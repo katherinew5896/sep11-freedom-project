@@ -248,10 +248,8 @@ player.onUpdate(() => {
 
 debug.inspect = true
 
-![k](ka.jpeg)
-
 `````
-
+![k](ka.jpeg)
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
