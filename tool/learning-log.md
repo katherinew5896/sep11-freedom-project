@@ -119,6 +119,7 @@ This is the thing I made from using all the code, I will use more of these code 
 
 ### 10/26/24
 
+After learning things for LL1. I used that and other codes I learned for LL2. So the first thing I learned was giving blocks a mass and being able to move it. 
 
 
 <!-- 
