@@ -115,6 +115,12 @@ for (let i = 0; i < 3; i++) {
 ![k](kaboom.js.png)
 This is the thing I made from using all the code, I will use more of these code for the future and hone my skills further. So for the freedom project I will be ready to make a game with some prior knowledge.
 
+## LL2
+
+### 10/26/24
+
+
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
