@@ -253,9 +253,9 @@ This is before, where we didn't move anything.
 ![k](ka.jpeg)
 
 This is after, where we ate everything and move the blocks with wasd using the code we learn and the sprites moving
-![]()
+![](kaafter)
 
-So this is 
+So this is what I learned and hope to use it for the future when making my freedomproject.
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
