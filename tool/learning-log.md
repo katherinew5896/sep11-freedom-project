@@ -248,7 +248,7 @@ player.onUpdate(() => {
 
 debug.inspect = true
 
-
+![k]()
 
 `````
 
