@@ -21,7 +21,7 @@ kaboom();
 
 </script>
 `````
-You would add the code to your html in the script. I then started to change some code I had copied from the Kaboom add.
+You would add the code to your html in the script. I then started to change some code I had copied from the Kaboom ad.
 
 ### 10/20/24
 The first thing I learned was how to add sprite, the code for this is: 
@@ -49,8 +49,8 @@ onKeyPress("space", () => {
     player.jump()
 })
 `````
-This is the basic to add a sprite, you can change the name and give it a different position.
-Another code I learned was adding different sprite together and making shapes.
+This is the basic way to add a sprite, you can change the name and give it a different position.
+Another code I learned was adding different sprites together and making shapes.
 `````js
 add([ pos(80, 240), 
 rect(700, 20),
@@ -63,7 +63,7 @@ area(), ])
     circle(16),
 ])
 ``````
-As you can see i add rectangle and a cricle using the shape name and putting it using position.
+As you can see I added a rectangle and a circle using the shape name and put it using position.
 So with all these together I made 
 `````js
 kaboom()
@@ -133,7 +133,7 @@ onKeyDown(" ", () => {
 })
 `````
 
-All three of these are things you can put in the code. One of the rotate the sprites, another cod emoves the sprites up or down. The last one moves it left or right.
+All three of these are things you can put in the code. One of the rotates the sprites, another cod moves the sprites up or down. The last one moves it left or right.
 
 Now if we go to the playground, I used the collision and changed the code for I changed it so you can use wasd to move, made it so the sprites are different and so the metal and grass block can move when you push it.
 
@@ -263,3 +263,5 @@ So this is what I learned and hope to use it for the future when making my freed
 * Questions you still have
 * What you're going to try next
 -->
+
+
