@@ -119,8 +119,19 @@ This is the thing I made from using all the code, I will use more of these code 
 
 ### 10/26/24
 
-After learning things for LL1. I used that and other codes I learned for LL2. So the first thing I learned was giving blocks a mass and being able to move it. 
-
+After learning things from LL1. I used that and other codes I learned for LL2. So the first thing I learned was giving blocks a mass and being able to move it. 
+`````js
+body({ mass: 10 }),
+`````
+This code allowed me to give my sprites a mass and was able to more it.
+Another thing I learned was 
+`````js
+onKeyDown(" ", () => {
+	player.angle += SPEED * dt()
+	player.move(0, -SPEED)
+	player.move(0, SPEED)
+})
+`````
 
 <!-- 
 * Links you used today (websites, videos, etc)
