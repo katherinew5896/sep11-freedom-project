@@ -249,7 +249,13 @@ player.onUpdate(() => {
 debug.inspect = true
 
 `````
+This is before, where we didn't move anything.
 ![k](ka.jpeg)
+
+This is after, where we ate everything and move the blocks with wasd using the code we learn and the sprites moving
+![]()
+
+So this is 
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
