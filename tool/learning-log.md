@@ -133,6 +133,125 @@ onKeyDown(" ", () => {
 })
 `````
 
+All three of these are things you can put in the code. One of the rotate the sprites, another cod emoves the sprites up or down. The last one moves it left or right.
+
+Now if we go to the playground, I used the collision and changed the code for I changed it so you can use wasd to move, made it so the sprites are different and so the metal and grass block can move when you push it.
+
+The code for this is 
+
+`````js
+// Collision handling
+kaboom({
+	scale: 2,
+})
+
+loadSprite("bean", "/sprites/ghosty.png")
+loadSprite("ghosty", "/sprites/bean.png")
+loadSprite("grass", "/sprites/grass.png")
+loadSprite("steel", "/sprites/steel.png")
+
+const SPEED = 320
+
+const player = add([
+	sprite("bean"),
+	pos(80, 40),
+	color(),
+	rotate(0),
+	area(),
+	body(),
+])
+
+
+onKeyDown("a", () => {
+	player.move(-SPEED, 0)
+})
+
+onKeyDown("d", () => {
+	player.move(SPEED, 0)
+})
+
+onKeyDown("w", () => {
+	player.move(0, -SPEED)
+})
+
+onKeyDown("s", () => {
+	player.move(0, SPEED)
+})
+
+onKeyDown("t", () => {
+	player.angle += SPEED * dt()
+})
+
+onKeyDown("g", () => {
+	player.angle += SPEED * dt()
+})
+
+for (let i = 0; i < 3; i++) {
+
+	const x = rand(0, width())
+	const y = rand(0, height())
+
+	add([
+		sprite("ghosty"),
+	        pos(x, y),
+
+		area(),
+		"enemy",
+	])
+
+}
+
+add([
+	sprite("grass"),
+	pos(center()),
+	area(),
+	body({ isStatic: true }),
+		body({ mass: 10 }),
+	"grass",
+])
+
+add([
+	sprite("steel"),
+	pos(100, 200),
+	area(),
+	body({ mass: 10 }),
+])
+
+
+player.onCollide("enemy", (enemy) => {
+	destroy(enemy)
+})
+
+
+player.onCollideUpdate("enemy", () => {
+})
+
+
+player.onCollideEnd("grass", (a) => {
+	debug.log("leave grass")
+})
+
+
+player.onClick(() => {
+	debug.log("hello")
+})
+
+player.onUpdate(() => {
+	// .isHovering() is provided by area() component, which returns a boolean of if the object is currently being hovered on
+	if (player.isHovering()) {
+		player.color = rgb(0, 0, 255)
+	} else {
+		player.color = rgb()
+	}
+})
+
+
+debug.inspect = true
+
+
+
+`````
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
