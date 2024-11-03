@@ -270,8 +270,113 @@ This allows us to change how fast the character goes. Another code I learned is
 setGravity(1000)
 `````
 This allows us to change the gravity.
+`````
+Another code I been learning througout the learning log is 
+`````
+onKeyPress("space", () => {
+	if (player.isGrounded()) {
+		player.jump()
+	}
+})
 
+onKeyDown("a", () => {
+	player.move(-SPEED, 0)
+})
 
+onKeyDown("d", () => {
+	player.move(SPEED, 0)
+})
+`````
+This code, is how they move. when you have one key down they will more in that way. So -speed with go left and speed will go right. The space allows us to jump.
+
+For LL3 I made a platform with the code I learned you are able to move around super fast and it feels like you are flying. The code below is the code I used.
+`````
+// Build levels with addLevel()
+
+// Start game
+kaboom()
+
+// Load assets
+loadSprite("bean", "/sprites/bean.png")
+loadSprite("coin", "/sprites/coin.png")
+loadSprite("spike", "/sprites/spike.png")
+loadSprite("grass", "/sprites/grass.png")
+loadSprite("ghosty", "/sprites/ghosty.png")
+loadSound("score", "/examples/sounds/score.mp3")
+
+const SPEED = 20000
+
+setGravity(1000)
+
+const level = addLevel([
+	// Design the level layout with symbols
+	"@  ^ $$",
+	"=======",
+], {
+	// The size of each grid
+	tileWidth: 64,
+	tileHeight: 64,
+	// The position of the top left block
+	pos: vec2(100, 200),
+	// Define what each symbol means (in components)
+	tiles: {
+		"@": () => [
+			sprite("bean"),
+			area(),
+			body(),
+			anchor("bot"),
+			"player",
+		],
+		"=": () => [
+			sprite("grass"),
+			area(),
+			body({ isStatic: true }),
+			anchor("bot"),
+		],
+		"$": () => [
+			sprite("coin"),
+			area(),
+			anchor("bot"),
+			"coin",
+		],
+		"^": () => [
+			sprite("spike"),
+			area(),
+			anchor("bot"),
+			"danger",
+		],
+	},
+})
+
+// Get the player object from tag
+const player = level.get("player")[0]
+
+// Movements
+onKeyPress("space", () => {
+	if (player.isGrounded()) {
+		player.jump()
+	}
+})
+
+onKeyDown("a", () => {
+	player.move(-SPEED, 0)
+})
+
+onKeyDown("d", () => {
+	player.move(SPEED, 0)
+})
+
+// Back to the original position if hit a "danger" item
+player.onCollide("danger", () => {
+	player.pos = level.tile2Pos(0, 0)
+})
+
+// Eat the coin!
+player.onCollide("coin", (coin) => {
+	destroy(coin)
+	play("score")
+})
+`````
 
 
 
