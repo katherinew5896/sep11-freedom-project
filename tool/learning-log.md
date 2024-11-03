@@ -256,6 +256,18 @@ This is after, where we ate everything and move the blocks with wasd using the c
 ![](kaafter.jpeg)
 
 So this is what I learned and hope to use it for the future when making my freedomproject game.
+
+### LL3
+### 11/3/24
+
+
+
+
+
+
+
+
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
