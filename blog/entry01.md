@@ -3,6 +3,19 @@
 
 # context
 
+
+
+# sources
+
+
+# EDP
+
+
+# skills
+
+
+
+
 [Next](entry02.md)
 
 [Home](../README.md)
