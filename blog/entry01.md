@@ -143,10 +143,10 @@ debug.inspect = true
 
 `````
 This is before, where we didn't move anything.
-![k](tool/ka.jpeg)
+![k](../tool/ka.jpeg)
 
 This is after, where we ate everything and move the blocks with wasd using the code we learn and the sprites moving
-![](tool/kaafter.jpeg)
+![](../tool/kaafter.jpeg)
 
 So this is what I learned and hope to use it for the future when making my freedomproject game.
 
