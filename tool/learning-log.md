@@ -260,8 +260,16 @@ So this is what I learned and hope to use it for the future when making my freed
 ### LL3
 ### 11/3/24
 
-
-
+For LL3 I learned a couple more codes.
+The first code I learned is:
+`````
+const SPEED = 1000
+````
+This allows us to change how fast the character goes. Another code I learned is
+`````
+setGravity(1000)
+`````
+This allows us to change the gravity.
 
 
 
