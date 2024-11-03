@@ -2,7 +2,7 @@
 ##### 11/3/24
 
 ## context
-For this year-long project I decided to use the tool Kaboom. Kaboom is a game engine where you can make 2D games. My backup tool was two.js which is another tool for making games. Aftering doing my learning logs I decided to stay with kaboom as my tool. the reason I decided on kaboom is because it feels just right for my skill level and it has been a really fun tool to use. For kaboom I was planning on making a game and working with Johnny. We decided to make a cooking game. This connects to last year where I made a website for cooking. Cooking is something I am passionate about so this year we will make a cooking game. The purposes of my game to the world, is for people get a understanding of how cooking works, if you never cooked before and are too scared to this game would be perfect. So for both LL1 and LL2 I have tinkerin many ways. 
+For this year-long project I decided to use the tool Kaboom. Kaboom is a game engine where you can make 2D games. My backup tool was three.js which is another tool for making games. Aftering doing my learning logs I decided to stay with kaboom as my tool. the reason I decided on kaboom is because it feels just right for my skill level and it has been a really fun tool to use. For kaboom I was planning on making a game and working with Johnny. We decided to make a cooking game. This connects to last year where I made a website for cooking. Cooking is something I am passionate about so this year we will make a cooking game. The purposes of my game to the world, is for people get a understanding of how cooking works, if you never cooked before and are too scared to this game would be perfect. So for both LL1 and LL2 I have tinkerin many ways. 
 
 Examples of my tinkering is my LL2 as you can see below
 So the first thing I learned was giving blocks a mass and being able to move it. 
@@ -144,7 +144,7 @@ This is after, where we ate everything and move the blocks with wasd using the c
 So as you can see from my LL2 I been tinkering by looking at codes, trying them myself and watching youtube videos to get a better understanding when I don't know something. 
 
 ## sources
-So I did my reserch for both kaboom and two.js. I found many sources so lets start of with the sources I found for two.js. The first source I found was [two.js](https://two.js.org/)
+So I did my reserch for both kaboom and three.js. I found many sources so lets start of with the sources I found for three.js. The first source I found was [three.js](https://threejs.org/) website. This website shows you everything there is for three.js. I also watched youtube videos like [How to use three.js website](https://www.youtube.com/watch?v=xJAfLdUgdc4). This gave me a understanding of how the website works and a tutorial on how three.js works. 
    
 ## EDP 
 
