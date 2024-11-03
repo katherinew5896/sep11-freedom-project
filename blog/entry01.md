@@ -144,7 +144,7 @@ This is after, where we ate everything and move the blocks with wasd using the c
 So as you can see from my LL2 I been tinkering by looking at codes, trying them myself and watching youtube videos to get a better understanding when I don't know something. 
 
 ## sources
-So I did my reserch for both kaboom and three.js. I found many sources so lets start of with the sources I found for three.js. The first source I found was [three.js](https://threejs.org/) website. This website shows you everything there is for three.js. I also watched youtube videos like [How to use three.js website](https://www.youtube.com/watch?v=xJAfLdUgdc4). This gave me a understanding of how the website works and a tutorial on how three.js works. 
+So I did my reserch for both kaboom and three.js. I found many sources so lets start of with the sources I found for three.js. The first source I found was [three.js](https://threejs.org/) website. This website shows you everything there is for three.js. I also watched youtube videos like [How to use three.js website](https://www.youtube.com/watch?v=xJAfLdUgdc4). This gave me a understanding of how the website works and a tutorial on how three.js works. But at the end I didn't use three.js I instead use kabbom. The sources for kaboom is way more than that of three.js 
    
 ## EDP 
 
