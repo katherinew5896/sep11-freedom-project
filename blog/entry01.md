@@ -144,7 +144,7 @@ This is after, where we ate everything and move the blocks with wasd using the c
 So as you can see from my LL2 I been tinkering by looking at codes, trying them myself and watching youtube videos to get a better understanding when I don't know something. 
 
 ## sources
-So I did my reserch for both kaboom and two.js. I found many sources so lets start of with the sources I found for two.js. The first source I found was https://two.js.org/
+So I did my reserch for both kaboom and two.js. I found many sources so lets start of with the sources I found for two.js. The first source I found was [two.js](https://two.js.org/)
    
 ## EDP 
 
