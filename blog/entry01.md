@@ -149,11 +149,13 @@ So I did my reserch for both kaboom and three.js. I found many sources so lets s
 ## EDP 
 EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being to scaredd to cook, I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in genral. I finished my define and researcg part of the EDp, I am on the brainstorming and plan part where I need to thinkl of how I can make a website and ways this game can make being have fun and learned how to cook.
 ## skills
-research
 
-Asking friends for help
+### Research
 
-Doing Learning Logs
+#### Asking friends for help
+
+### Doing Learning Logs
+I learned that doing your Learning Logs are really important, 
 
 
 [Next](entry02.md)
