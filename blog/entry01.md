@@ -144,7 +144,7 @@ This is before, where we didn't move anything.
 This is after, where we ate everything and move the blocks with wasd using the code we learn and the sprites moving
 ![](../tool/kaafter.jpeg)
 
-So this is what I learned and hope to use it for the future when making my freedomproject game.
+So as you can see from my LL2 I been tinkering by looking at codes, trying them myself and watching youtube videos to get a better understanding when I don't know something. 
 
 ## Sources
 
