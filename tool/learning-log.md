@@ -378,7 +378,7 @@ player.onCollide("coin", (coin) => {
 })
 `````
 [k]()
-
+This is what I did for LL3 and I will improve more so I can do go on my freedom project.
 
 
 
