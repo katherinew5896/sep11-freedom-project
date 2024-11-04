@@ -377,6 +377,7 @@ player.onCollide("coin", (coin) => {
 	play("score")
 })
 `````
+[k]()
 
 
 
