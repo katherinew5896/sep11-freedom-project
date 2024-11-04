@@ -152,10 +152,10 @@ EDP or Engineering Design Process is the part of the project you are on. There a
 ## skills
 
 ### 1. Research
-I had to do research before choosing a tool. I learned a lot about researching like how to google well and find what you are looking for. Like when I was looking up three.js videos I couldn't find a lot but I had to search up more information to find what I was looking for.
+I had to do research before choosing a tool. I learned a lot about researching like how to google well and find what you are looking for. Like when I was looking up three.js videos I couldn't find a lot but I had to search up more information to find what I was looking for. The website helped me since they provide many links and resources.
 
 ### 2. Communication
-While researching I've noticed that communication was a very important part because to work together is to communicate. We need to communicate in order to make changes while advancing in technology. Communication is how we share ideas and knowledge with one another. Also when I needed help I asked my friends, like I asked Johnny how Kaboom works at first and he was able to help me. Also Johnny told me to do my learning log so communication is really important. So these were the skills I learned for blog entry 1.
+While researching I've noticed that communication was a very important part because to work together is to communicate. We need to communicate in order to make changes while advancing in technology. Communication is how we share ideas and knowledge with one another. Also when I needed help I asked my friends, like I asked Johnny how Kaboom works at first and he was able to help me by providing examples and resources. Also Johnny reminded me to do my learning log to get more usd to it so communication is really important for growth and friendships. So these were the skills I learned for blog entry 1.
 
 
 [Next](entry02.md)
