@@ -377,7 +377,7 @@ player.onCollide("coin", (coin) => {
 	play("score")
 })
 `````
-[k]()
+[k](k.jpeg)
 This is what I did for LL3 and I will improve more so I can do go on my freedom project.
 
 
