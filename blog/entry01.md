@@ -148,12 +148,13 @@ So I did my research for both kaboom and three.js. I found many sources so lets 
    
 ## EDP 
 EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finished my define and research part of the EDp, I am on the brainstorming and planning part where I need to think of how I can make a website and ways this game can make being have fun and learn how to cook.
+
 ## skills
 
-### Research
+### 1. Research
 I had to do research before choosing a tool. I learned a lot about researching like how to google well and find what you are looking for. Like when I was looking up three.js videos I couldn't find a lot but I had to search up more information to find what I was looking for.
 
-### Communication
+### 2. Communication
 While researching I've noticed that communication was a very important part because to work together is to communicate. We need to communicate in order to make changes while advancing in technology. Communication is how we share ideas and knowledge with one another. Also when I needed help I asked my friends, like I asked Johnny how Kaboom works at first and he was able to help me. Also Johnny told me to do my learning log so communication is really important. So these were the skills I learned for blog entry 1.
 
 
