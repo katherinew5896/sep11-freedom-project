@@ -257,8 +257,10 @@ This is after, where we ate everything and move the blocks with wasd using the c
 
 So this is what I learned and hope to use it for the future when making my freedomproject game.
 
+
+
 ### LL3
-### 11/3/24
+### 11/11/24
 
 For LL3 I learned a couple more codes.
 The first code I learned is:
@@ -379,8 +381,6 @@ player.onCollide("coin", (coin) => {
 `````
 ![k](k.jpeg)
 This is what I did for LL3 and I will improve more so I can do go on my freedom project.
-
-
 
 <!-- 
 * Links you used today (websites, videos, etc)
