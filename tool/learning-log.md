@@ -385,6 +385,13 @@ This is what I did for LL3 and I will improve more so I can do go on my freedom 
 
 # LL4
 ## 11/24/24
+In LL3 I learned how to change the speed of myself but this time I can change the speed of the enemy and differnt things like bullets.
+`````js
+const SPEED = 500
+const ENEMY_SPEED = 300
+const BULLET_SPEED = 1000
+`````
+So the const makes it a variable which is a string and the SPEED makes it so it can be faster or slower.
 
 
 <!-- 
