@@ -535,6 +535,9 @@ onKeyDown("s", () => {
 	player.move(0, SPEED)
 })
 ``````
+This is how it work and what the codes did.
+![a][ko.jpeg]
+![a][kao.jpeg]
 
 <!-- 
 * Links you used today (websites, videos, etc)
