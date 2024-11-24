@@ -382,6 +382,11 @@ player.onCollide("coin", (coin) => {
 ![k](k.jpeg)
 This is what I did for LL3 and I will improve more so I can do go on my freedom project.
 
+
+# LL4
+## 11/24/24
+
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
