@@ -535,7 +535,7 @@ onKeyDown("s", () => {
 	player.move(0, SPEED)
 })
 ``````
-This is how it work and what the codes did.
+This is how it work and what the codes did. This is what I did for LL4.
 
 ![a](ko.jpeg)
 ![a](kao.jpeg)
