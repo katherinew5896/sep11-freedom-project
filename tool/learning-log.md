@@ -380,19 +380,19 @@ player.onCollide("coin", (coin) => {
 })
 `````
 ![k](k.jpeg)
-This is what I did for LL3 and I will improve more so I can do go on my freedom project.
+This is what I did for LL3 and I will improve more so I can go on my freedom project.
 
 
 # LL4
 ## 11/24/24
-In LL3 I learned how to change the speed of myself but this time I can change the speed of the enemy and differnt things like bullets.
+In LL3 I learned how to change the speed of myself but this time I can change the speed of the enemy and different things like bullets.
 `````js
 const SPEED = 500
 const ENEMY_SPEED = 300
 const BULLET_SPEED = 1000
 `````
 So the const makes it a variable which is a string and the SPEED makes it so it can be faster or slower.
-Another thing I learned is states which is what the character is doing. The code for this is 
+Another thing I learned is what the character is doing. The code for this is 
 `````js
 	state("move", [ "idle", "attack", "move" ]),
 `````
@@ -402,7 +402,7 @@ enemy.onStateEnter("idle", async () => {
 	enemy.enterState("attack")
 })
 ````
-This code makes it so the character becomme idle for 0.1 after attacking. 
+This code makes it so the character become idle for 0.1 after attacking. 
 
 ```js
 enemy.onStateEnter("attack", async () => {
@@ -432,7 +432,7 @@ if (player.exists()) {
 
 })
 `````
-This code makes it so if player exists the enemy will attack you and we can change the bullets sizes and color and other propeties.
+This code makes it so if a player exists the enemy will attack you and we can change the bullets sizes and color and other properties.
 
 Together with all this code we make:
 ``````js
@@ -465,8 +465,8 @@ const enemy = add([
 	state("move", [ "idle", "attack", "move" ]),
 ])
 
-// Run the callback once every time we enter "idle" state.
-// Here we stay "idle" for 0.5 second, then enter "attack" state.
+// Run the callback once every time we enter an "idle" state.
+// Here we stay "idle" for 0.5 second, then enter the "attack" state.
 enemy.onStateEnter("idle", async () => {
 	await wait(0.1)
 	enemy.enterState("attack")
@@ -535,7 +535,7 @@ onKeyDown("s", () => {
 	player.move(0, SPEED)
 })
 ``````
-This is how it work and what the codes did. This is what I did for LL4.
+This is how it works and what the codes did. This is what I did for LL4.
 
 ![a](ko.jpeg)
 ![a](kao.jpeg)
@@ -547,5 +547,6 @@ This is how it work and what the codes did. This is what I did for LL4.
 * Questions you still have
 * What you're going to try next
 -->
+
 
 
