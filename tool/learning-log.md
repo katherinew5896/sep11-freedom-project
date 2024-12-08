@@ -546,6 +546,73 @@ This is how it works and what the codes did. This is what I did for LL4.
 # 12/8/24
 
 For LL5 I learned two different codes one where when you move your mouses up or down it will follow and another where when you scroll it will change teh size of the object that is there.
+
+
+
+`````js
+// Mouse handling
+onUpdate(() => {
+	if(isMouseDown("left") && isMouseMoved()) {
+		cameraPosition = cameraPosition.sub(mouseDeltaPos().scale(1 / cameraScale))
+		camPos(cameraPosition)
+	}
+})
+
+onScroll((delta)=>{
+	cameraScale = cameraScale * (1 - 0.1 * Math.sign(delta.y))
+	camScale(cameraScale)
+})
+`````
+These are the codes which makes it so when you move it will move with you and the scroll will change the size. Now lets add this with other codes and see what happens.
+
+`````js
+kaboom()
+
+let cameraPosition = camPos()
+let cameraScale = 1
+
+// Loads a random 2500px image
+loadSprite("bigyoshi", "/examples/sprites/YOSHI.png")
+
+add([
+	sprite("bigyoshi"),
+])
+
+// Adds a label
+const label = make([
+	text("Booooooo"),
+])
+
+add([
+	rect(label.width, label.height),
+	color(0, 0, 0),
+])
+
+add(label)
+
+// Mouse handling
+onUpdate(() => {
+	if(isMouseDown("left") && isMouseMoved()) {
+		cameraPosition = cameraPosition.sub(mouseDeltaPos().scale(1 / cameraScale))
+		camPos(cameraPosition)
+	}
+})
+
+onScroll((delta)=>{
+	cameraScale = cameraScale * (1 - 0.1 * Math.sign(delta.y))
+	camScale(cameraScale)
+})
+`````
+So we using the code we just learned and other codes from the past to make this booo move with our mouse. 
+![]()
+
+
+
+
+
+
+
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
