@@ -545,7 +545,7 @@ This is how it works and what the codes did. This is what I did for LL4.
 # LL5
 # 12/8/24
 
-For LL5 I learned two different codes one where when you move your mouses up or down it will follow and another where when you scroll it will change teh size of the object that is there.
+For LL5 I learned two different codes one where when you move your mouses up or down it will follow and another where when you scroll it will change the size of the object that is there.
 
 
 
