@@ -540,6 +540,12 @@ This is how it works and what the codes did. This is what I did for LL4.
 ![a](ko.jpeg)
 ![a](kao.jpeg)
 
+
+
+# LL5
+# 12/8/24
+
+For LL5 I learned two different codes one where when you move your mouses up or down it will follow and another where when you scroll it will change teh size of the object that is there.
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
