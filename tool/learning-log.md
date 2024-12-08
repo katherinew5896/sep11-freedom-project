@@ -613,6 +613,8 @@ This was also after
 
 
 
+As you can see when you move you can move it and it will change what it looks like just by using your mouse. This was my LL5 and there will be more to come for the next LL.
+
 
 
 
