@@ -604,11 +604,11 @@ onScroll((delta)=>{
 })
 `````
 So we using the code we just learned and other codes from the past to make this booo move with our mouse. 
-![h](after.jpeg)
-This was before
 ![g](before.jpeg)
+This was before
+![t](after.jpeg)
 This was after
-![jk](beforemath.jpeg)
+![jk](afteremath.jpeg)
 This was also after
 
 
