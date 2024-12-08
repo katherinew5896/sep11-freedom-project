@@ -608,7 +608,7 @@ So we using the code we just learned and other codes from the past to make this 
 This was before
 ![t](after.jpeg)
 This was after
-![jk](afteremath.jpeg)
+![jk](aftermath.jpeg)
 This was also after
 
 
