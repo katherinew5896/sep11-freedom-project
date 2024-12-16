@@ -2,7 +2,7 @@
 ##### 12/9/24
 
 ### content
-This year we have our Sep 11 freedom project where I have been learning code using kaboom. My learning tool is Kaboom.js and so far I’ve been using it and learning a lot about it through my Learning Logs. I have been trying out different codes and experimenting with making a cooking game. My partner is Johnny Yang and together we are working on making a fun RPG cooking game where you can explore the world and enjoy cooking. The way we've been learning our codes are from the websites. One of these website is the [kaboom website](https://kaboomjs.com/) in this website you can see how different codes are used and you can see the games that they made. This is where I do most of my tinkering and find codes that could help for the future. Another thing I used I was youtube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log which is where my notes are for these codes I learned. Some of these code I learned was:
+This year we have our Sep 11 freedom project where I have been learning code using kaboom. My learning tool is Kaboom.js and so far I’ve been using it and learning a lot about it through my Learning Logs. I have been trying out different codes and experimenting with making a cooking game. My partner is Johnny Yang and together we are working on making a fun RPG cooking game where you can explore the world and enjoy cooking. The way we've been learning our codes are from the websites. One of these websites is the [kaboom website](https://kaboomjs.com/) in this website you can see how different codes are used and you can see the games that they made. This is where I do most of my tinkering and find codes that could help for the future. Another thing I used was youtube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log which is where my notes are for these codes I learned. Some of these code I learned was:
 
 `````js
 const SPEED = 500
@@ -20,7 +20,7 @@ enemy.onStateEnter("idle", async () => {
 	enemy.enterState("attack")
 })
 ````
-This code makes it so the character become idle for 0.1 after attacking. 
+This code makes it so the character becomes idle for 0.1 after attacking. 
 
 ```js
 enemy.onStateEnter("attack", async () => {
@@ -66,7 +66,7 @@ onScroll((delta)=>{
 	camScale(cameraScale)
 })
 `````
-These are the codes which makes it so when you move it will move with you and the scroll will change the size. Now lets add this with other codes and see what happens.
+These are the codes which make it so when you move it will move with you and the scroll will change the size. Now let's add this with other codes and see what happens.
 
 `````js
 kaboom()
@@ -75,10 +75,10 @@ let cameraPosition = camPos()
 let cameraScale = 1
 
 // Loads a random 2500px image
-loadSprite("bigyoshi", "/examples/sprites/YOSHI.png")
+loadSprite("big yoshi", "/examples/sprites/YOSHI.png")
 
 add([
-	sprite("bigyoshi"),
+	sprite("big yoshi"),
 ])
 
 // Adds a label
@@ -106,27 +106,27 @@ onScroll((delta)=>{
 	camScale(cameraScale)
 })
 `````
-This are the codes I have learned from the last time. 
+These are the codes I have learned from the last time. 
    
 ## EDP 
-EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finised solving the problem and brainstorming everything. The part I am on right now is t he part 4 of the EDP whcih si planning. I am planning on how the game should look and how the game will work. This is the part of the EDP part I am on. 
+EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finished solving the problem and brainstorming everything. The part I am on right now is the part 4 of the EDP which is planning. I am planning on how the game should look and how the game will work. This is the part of the EDP part I am on. 
 
 ## Skill
 I have learned many skills while working on this project. Some of which is communication and testing codes.
 
 ### Communication 
 
-Communication is one of the most important skills to learn, you have to communicate with many people. SinceI have a partner I need to communicate and talk to them about what we should do for the project. Also how we should do it. Another thing that is importing is asking my friends for help, this is developing my communication skills and will help me when I get a job.
+Communication is one of the most important skills to learn, you have to communicate with many people. SinceI have a partner I need to communicate and talk to them about what we should do for the project. Also how we should do it. Another thing that is important is asking my friends for help, this is developing my communication skills and will help me when I get a job.
 
 
 
 ### Testing codes 
 
-Testing code isn’t a thing I used to do. However, I learned that testing codes is a really important skill to learn. You should always be brave and try code. When something doesn’t work you should always try it and keep trying until you get it. This is something I have been doing for the Learning Log. I will keep being brave a test code for the future of this game.
+Testing code isn’t a thing I used to do. However, I learned that testing codes is a really important skill to learn. You should always be brave and try code. When something doesn’t work you should always try it and keep trying until you get it. This is something I have been doing for the Learning Log. I will keep being brave and test code for the future of this game.
 
 ### Winter break
 
-So during the winter break, my plans 
+So during the winter break, my plan is to talk to Johnny Yang and code together. We will learn more code and help each other when we need help. We will start making the game and a outline for the game as well. This will be a long break so after we finish our plan is to make sure everything works and it is playable. Learning if there is a way to play with other people, and add music, animation and different levels for players to play with. I know this might be hard so we might not finish during the break but we will try to do most of these ideas and hope they turn out great. Also that everything works and runs correctly. 
 
 
 
@@ -134,3 +134,6 @@ So during the winter break, my plans
 [Previous](entry01.md) | [Next](entry03.md)
 
 [Home](../README.md)
+
+
+
