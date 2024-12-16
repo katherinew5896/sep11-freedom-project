@@ -4,7 +4,53 @@
 ### content
 This year we have our Sep 11 freedom project where I have been learning code using kaboom. My learning tool is Kaboom.js and so far I’ve been using it and learning a lot about it through my Learning Logs. I have been trying out different codes and experimenting with making a cooking game. My partner is Johnny Yang and together we are working on making a fun RPG cooking game where you can explore the world and enjoy cooking. The way we've been learning our codes are from the websites. One of these website is the [kaboom website](https://kaboomjs.com/) in this website you can see how different codes are used and you can see the games that they made. This is where I do most of my tinkering and find codes that could help for the future. Another thing I used I was youtube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log which is where my notes are for these codes I learned. Some of these code I learned was:
 
+`````js
+const SPEED = 500
+const ENEMY_SPEED = 300
+const BULLET_SPEED = 1000
+`````
+So the const makes it a variable which is a string and the SPEED makes it so it can be faster or slower.
+Another thing I learned is what the character is doing. The code for this is 
+`````js
+	state("move", [ "idle", "attack", "move" ]),
+`````
+````js
+enemy.onStateEnter("idle", async () => {
+	await wait(0.1)
+	enemy.enterState("attack")
+})
+````
+This code makes it so the character become idle for 0.1 after attacking. 
 
+```js
+enemy.onStateEnter("attack", async () => {
+```
+This is saying that when attacking there will be a bullet. 
+
+`````js
+if (player.exists()) {
+
+		const dir = player.pos.sub(enemy.pos).unit()
+
+		add([
+			pos(enemy.pos),
+			move(dir, BULLET_SPEED),
+			rect(100, 12),
+			area(),
+			offscreen({ destroy: false }),
+			anchor("center"),
+			color(YELLOW),
+			"bullet",
+		])
+
+	}
+
+	await wait(0.1)
+	enemy.enterState("move")
+
+})
+`````
+This code makes it so if a player exists the enemy will attack you and we can change the bullets sizes and color and other properties.
    
 ## EDP 
 EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finished my define and research part of the EDp, I am on the brainstorming and planning part where I need to think of how I can make a website and ways this game can make being have fun and learn how to cook.
