@@ -51,10 +51,67 @@ if (player.exists()) {
 })
 `````
 This code makes it so if a player exists the enemy will attack you and we can change the bullets sizes and color and other properties.
+
+`````js
+// Mouse handling
+onUpdate(() => {
+	if(isMouseDown("left") && isMouseMoved()) {
+		cameraPosition = cameraPosition.sub(mouseDeltaPos().scale(1 / cameraScale))
+		camPos(cameraPosition)
+	}
+})
+
+onScroll((delta)=>{
+	cameraScale = cameraScale * (1 - 0.1 * Math.sign(delta.y))
+	camScale(cameraScale)
+})
+`````
+These are the codes which makes it so when you move it will move with you and the scroll will change the size. Now lets add this with other codes and see what happens.
+
+`````js
+kaboom()
+
+let cameraPosition = camPos()
+let cameraScale = 1
+
+// Loads a random 2500px image
+loadSprite("bigyoshi", "/examples/sprites/YOSHI.png")
+
+add([
+	sprite("bigyoshi"),
+])
+
+// Adds a label
+const label = make([
+	text("Booooooo"),
+])
+
+add([
+	rect(label.width, label.height),
+	color(0, 0, 0),
+])
+
+add(label)
+
+// Mouse handling
+onUpdate(() => {
+	if(isMouseDown("left") && isMouseMoved()) {
+		cameraPosition = cameraPosition.sub(mouseDeltaPos().scale(1 / cameraScale))
+		camPos(cameraPosition)
+	}
+})
+
+onScroll((delta)=>{
+	cameraScale = cameraScale * (1 - 0.1 * Math.sign(delta.y))
+	camScale(cameraScale)
+})
+`````
+This are the codes I have learned from the last time. 
    
 ## EDP 
-EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finished my define and research part of the EDp, I am on the brainstorming and planning part where I need to think of how I can make a website and ways this game can make being have fun and learn how to cook.
+EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. The problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. You can learn many things like how to cook, different recipes and have fun with friends in general. I finised solving the problem and brainstorming everything. The part I am on right now is t he part 4 of the EDP whcih si planning. I am planning on how the game should look and how the game will work. This is the part of the EDP part I am on. 
 
+## Skill
 I have learned many skills while working on this project. Some of which is communication and testing codes.
 
 ### Communication 
@@ -66,6 +123,10 @@ Communication is one of the most important skills to learn, you have to communic
 ### Testing codes 
 
 Testing code isn’t a thing I used to do. However, I learned that testing codes is a really important skill to learn. You should always be brave and try code. When something doesn’t work you should always try it and keep trying until you get it. This is something I have been doing for the Learning Log. I will keep being brave a test code for the future of this game.
+
+### Winter break
+
+So during the winter break, my plans 
 
 
 
