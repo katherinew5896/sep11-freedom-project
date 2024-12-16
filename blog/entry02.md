@@ -127,7 +127,7 @@ Testing code isn’t a thing I used to do. However, I learned that testing codes
 ### Winter break
 
 So during the winter break, my plan is to talk to Johnny Yang and code together. We will learn more code and help each other when we need help. We will start making the game and a outline for the game as well. This will be a long break so after we finish our plan is to make sure everything works and it is playable. Learning if there is a way to play with other people, and add music, animation and different levels for players to play with. I know this might be hard so we might not finish during the break but we will try to do most of these ideas and hope they turn out great. Also that everything works and runs correctly. 
-
+ 
 
 
 
