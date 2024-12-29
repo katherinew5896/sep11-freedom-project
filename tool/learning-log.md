@@ -834,10 +834,10 @@ go("main", 0)
 
 `````
 What this code does it that you can talk to people and go between two levels. 
-!(k)[level1.png]
-!(k)[level2.png]
+![k](level1.png)
+![k](level2.png)
 You can hop between the levels.
-!(k)[ide.png]
+![k](ide.png)
 This shwos that I was able to use my ide and put everything on there.
 
 <!-- 
