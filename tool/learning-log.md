@@ -603,7 +603,7 @@ onScroll((delta)=>{
 	camScale(cameraScale)
 })
 `````
-So we using the code we just learned and other codes from the past to make this booo move with our mouse. 
+So we used the code we just learned and other codes from the past to make this booo move with our mouse. 
 ![g](before.jpeg)
 This was before
 ![t](after.jpeg)
@@ -619,7 +619,7 @@ As you can see when you move you can move it and it will change what it looks li
 ## LL6
 ## 12/29/24
 
-So for LL6 I got started on planing for my project. So what I did first was make levels where the player can talk to people. So during the break the plan was for me and Johnny to talk and work together throughout the break and that is what we did. So what Johnny did was do the planning on a google drawing, after I used his model and made a level and a testing plan. Which you can see below. 
+So for LL6 I got started on planning for my project. So what I did first was make levels where the player can talk to people. So during the break the plan was for me and Johnny to talk and work together throughout the break and that is what we did. So what Johnny did was do the planning on a google drawing, after I used his model and made a level and a testing plan. Which you can see below. 
 
 ````` js
 // simple rpg style walk and talk
@@ -833,7 +833,7 @@ scene("win", () => {
 go("main", 0)
 
 `````
-What this code does it that you can talk to people and go between two levels. 
+What this code does is that you can talk to people and go between two levels. 
 ![k](level1.png)
 ![k](level2.png)
 
@@ -841,7 +841,7 @@ You can hop between the levels.
 
 ![k](ide.png)
 
-This shwos that I was able to use my ide and put everything on there.
+This shows that I was able to use my ide and put everything on there.
 
 This is what we did for LL6 and we are planning on changing the texture and adding music to it for the next LL.
 
@@ -852,6 +852,9 @@ This is what we did for LL6 and we are planning on changing the texture and addi
 * Questions you still have
 * What you're going to try next
 -->
+
+
+
 
 
 
