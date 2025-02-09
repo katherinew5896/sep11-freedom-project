@@ -231,7 +231,7 @@ So during the the break we made levels and had it so you can go between the leve
 So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. When we finish these steps we want to do more where you can go around the map and explore. You can maybe get different line of work. These are the plans for the future and hope that the game will be enjoyable. 
 
 ## EDP 
-
+EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. As I said before the problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. So wondering how we are going to make this game, while I already brainstorm the game, we want to have a game with different levels that you could go between, each level there is different things to do. This was the brainstorming part after this we get to the planning part which is the part we are still on.
 
 ## Skill
 
