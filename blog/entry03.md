@@ -228,7 +228,7 @@ So during the the break we made levels and had it so you can go between the leve
 
 ### My plans from here are
  
-So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. 
+So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. When we finish these steps we want to do more where you can go around the map and explore. You can maybe get different line of work. These are the plans for the future and hope that the game will be enjoyable. 
 
 ## EDP 
 
