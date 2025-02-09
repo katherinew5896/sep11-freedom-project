@@ -219,12 +219,12 @@ go("main", 0)
 
 `````
 What this code does is that you can talk to people and go between two levels. 
-![k](level1.png)
-![k](level2.png)
+![k](../tool/level1.png)
+![k](../tool/level2.png)
 
 You can hop between the levels.
 
-![k](ide.png)
+![k](../tool/ide.png)
 
 ### My plans from here are
  
