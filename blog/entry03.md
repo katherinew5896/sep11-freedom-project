@@ -224,11 +224,11 @@ What this code does is that you can talk to people and go between two levels.
 
 You can hop between the levels.
 
-![k](../tool/ide.png)
+So during the the break we made levels and had it so you can go between the levels. We need to add texture and make more levels. 
 
 ### My plans from here are
  
-
+So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. 
 
 ## EDP 
 
