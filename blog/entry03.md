@@ -228,16 +228,16 @@ So during the the break we made levels and had it so you can go between the leve
 
 ### My plans from here are
  
-So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. When we finish these steps we want to do more where you can go around the map and explore. You can maybe get different line of work. These are the plans for the future and hope that the game will be enjoyable. 
+So as I said the plan for the future is to make it so we can have some texture, make more levels, have it so we can talk to npc and when a npc finish ordering they sit down and after they leave when they eat. When we finish these steps we want to do more where you can go around the map and explore. You can maybe get a different line of work. These are the plans for the future and I really hope that the game will be enjoyable for most.
 
 ## EDP 
-EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. As I said before the problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. So wondering how we are going to make this game, while I already brainstorm the game, we want to have a game with different levels that you could go between, each level there is different things to do. This was the brainstorming part after this we get to the planning part which is the part we finished during the break, we had a outline of the plan and we made a prototype. So the part we are on at the moment is the create part which is making a prototype and seeing if it works. The prototype we made works but we just need to add more. This is to part of the Engineering Design Process we are on.
+EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. As I said before, the problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. So wondering how we are going to make this game, while I already brainstormed the game, we want to have a game with different levels that you could go between, each level there are different things to do. This was the brainstorming part. After this we get to the planning part which is the part we finished during the break, we had an outline of the plan and we made a prototype. So the part we are on at the moment is the create part which is making a prototype and seeing if it works. The prototype we made works but we just need to add more. This is part of the Engineering Design Process we are on.
 
 ## Skill
 
-1.
+1. One skill I've accuired is decision making and this was kind of troublesome in a way because there were times when i had to decide what ideas to cook up for the practice code I was doing on Kaboom. Also i had to decide what kind of practice code i'd make so it could be easier while using the keyboard movements, but also kind of challenging and trying new obstacles and blocks for bean to move through.
 
-2.
+2.Another skill I had to work on was really reading the material i was working on in depth. This was a problem at first because i did not want to read every word when it came to instructions. usually i would skim through everything and think it would be fine since i've been using most of the same code. But not reading instructions and tutorials was doing more harm than good because i'd be lost when it came time to do the exercise.
 
 3.Another skill I learned was to not be afraid to ask my classmates because I am more self reliant and choose to do things by myself. I realized how important this skill is due to me improving from my peers' comments and feedback on my work. It is important to build relationships to kind of help give you a push when you need it. I usually try things on my own first, but if im stuck i'll ask my friends who are working on teh same topics to review my work and give helpfull feedback.
 
