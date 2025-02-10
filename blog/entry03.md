@@ -235,6 +235,12 @@ EDP or Engineering Design Process is the part of the project you are on. There a
 
 ## Skill
 
+1.
+
+2.
+
+3.Another skill I learned was to not be afraid to ask my classmates because I am more self reliant and choose to do things by myself. I realized how important this skill is due to me improving from my peers' comments and feedback on my work. It is important to build relationships to kind of help give you a push when you need it. I usually try things on my own first, but if im stuck i'll ask my friends who are working on teh same topics to review my work and give helpfull feedback.
+
 [Previous](entry02.md) | [Next](entry04.md)
 
 [Home](../README.md)
