@@ -850,6 +850,7 @@ LL9
 3/8/25
 
 So for the LL9 I had to learn how to size and resize something since when I was doing it last time I didn't change the size of anything and it could be important. So I learned how to change the size of a character and the background. So as you can see here everything changes when changing the numbers.
+
 ![k](c.jpeg)
 ![k](c2.jpeg)
 
