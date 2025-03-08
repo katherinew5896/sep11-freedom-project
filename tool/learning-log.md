@@ -853,8 +853,14 @@ So for the LL9 I had to learn how to size and resize something since when I was 
 
 ![k](c.jpeg)
 ![k](c2.jpeg)
-As you can see here that the thing became really big since I changed the values but if I made it bigger it becomes smaller.
+As you can see here, the thing became really big since I changed the values, but if I made it bigger, it became smaller.
+![k](b.jpeg)
+![k](b2.jpeg)
+As you can see in the code the value is bigger but the character became small. So this is what I learned.
 
+
+
+This is what I did and it should be helpful in the future. 
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
