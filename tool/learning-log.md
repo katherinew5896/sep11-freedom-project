@@ -853,6 +853,7 @@ So for the LL9 I had to learn how to size and resize something since when I was 
 
 ![k](c.jpeg)
 ![k](c2.jpeg)
+As you can see here that the thing became really big since I changed the values but if I made it bigger it becomes smaller.
 
 <!-- 
 * Links you used today (websites, videos, etc)
