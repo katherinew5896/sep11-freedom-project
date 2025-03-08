@@ -845,6 +845,12 @@ This shows that I was able to use my ide and put everything on there.
 
 This is what we did for LL6 and we are planning on changing the texture and adding music to it for the next LL.
 
+
+LL9
+3/8/25
+
+So for the LL9 I had to learn how to size and resize something since when I was doing it last time I didn't change the size of anything and it could be important. So I learned how to change the size of a character and the background. So as you can see here everything changes when changing the numbers.
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
