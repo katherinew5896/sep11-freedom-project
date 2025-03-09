@@ -860,7 +860,7 @@ As you can see in the code the value is bigger but the character became small. S
 
 
 
-This is what I did and it should be helpful in the future. 
+This is what I did and it should be helpful in the future for when customizing character sizes!
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
