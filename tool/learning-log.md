@@ -849,7 +849,7 @@ This is what we did for LL6 and we are planning on changing the texture and addi
 LL9
 3/8/25
 
-So for the LL9 I had to learn how to size and resize something since when I was doing it last time I didn't change the size of anything and it could be important. So I learned how to change the size of a character and the background. So as you can see here everything changes when changing the numbers.
+So for the LL9 I had to learn how to size and resize something since when I was doing it last time I didn't change the size of anything and it could be important. So I learned how to change the size of a character and the background. So as you can see here everything changes when changing the numbers with width and height.
 
 ![k](c.jpeg)
 ![k](c2.jpeg)
