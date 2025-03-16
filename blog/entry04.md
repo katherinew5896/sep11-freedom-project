@@ -267,7 +267,7 @@ So far, I have done some of my MVPs. I made levels where you can go in between t
 
 
 ## EDP 
-
+EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. As I said before, the problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. So wondering how we are going to make this game, while I already brainstormed the game, we want to have a game with different levels that you could go between, at each level there are different things to do, one level you collect resources, the next you talk to NPC and you can give them food. You need to cook food it will show you how to cook and if you put it for too long you can't use it. Now we are trying to make a prototype of the game, so far we made the levels and characters, and the next thing to do is to add the cooking part. This is the Engineering Design Process we are on. 
 
 ## Skill
 
