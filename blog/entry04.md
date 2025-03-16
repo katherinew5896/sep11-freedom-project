@@ -259,8 +259,8 @@ scene("win", () => {
 // Start the game
 go("main", 0);
 `````
-![k](../tool/l.png)
-![k](../tool/h.png)
+![k](../tool/l.jpeg)
+![k](../tool/h.jpeg)
 ### My plans from here are
  
 
