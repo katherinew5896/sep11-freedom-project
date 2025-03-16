@@ -269,8 +269,10 @@ So far, I have done some of my MVPs. I made levels where you can go in between t
 ## EDP 
 EDP or Engineering Design Process is the part of the project you are on. There are 8 different parts. As I said before, the problem I am trying to solve is people being too scared to cook. I plan on making a game that everyone can enjoy and not be scared of cooking. So wondering how we are going to make this game, while I already brainstormed the game, we want to have a game with different levels that you could go between, at each level there are different things to do, one level you collect resources, the next you talk to NPC and you can give them food. You need to cook food it will show you how to cook and if you put it for too long you can't use it. Now we are trying to make a prototype of the game, so far we made the levels and characters, and the next thing to do is to add the cooking part. This is the Engineering Design Process we are on. 
 
-## Skill
-
+## Skills
+1. first skill i needed to work on was time management. This had me a bit all over the place as i had to make time to practice my tool, but also work on other assignments. To better manage my time i used google tasks and started to dedicate certain hours for each thing i needed to do in order to stay on top of everything, but also learn as i go. So that when the times comes i actually know what im doing and can chase the learning not the points.
+2. The second skill i worked on was problem-solving skills. This was very much needed as i had trouble asking myself how to decipher codes and find which wouldn't work and which did. This was not easy as i did not fully grasp the concept of certain topics and had a hard time solving problems on my own without help from my peers. I needed to go back on recent projects i did and my notes to help me understand why codes were not working. It took a lot to actually put in the effort to stop and think about what the problem i was facing was. I just need to get used to sitting down and taking my time to learn each step and face each problem.
+3. The third skill i had to work on was
 
 
 
