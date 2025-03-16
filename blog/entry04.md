@@ -1,6 +1,5 @@
 # Entry 4
-# Entry 3
-##### 2/3/25
+##### 3/16/25
 
 ### content
 This year we had the freedom project, our year-long project for Sep. I have been learning the tool I used which is kaboom in many ways. As I said before one of these websites for learning is the [kaboom website](https://kaboomjs.com/) in this website you can see how different codes are used and you can see the games that they made. This is where I do most of my tinkering and find codes that could help in the future. Another thing I used for learning was YouTube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log which is where my notes are for the codes I learned. The last time I did my blog was after winter break when I planned what to do during the break and also did LL. So what did I do: 
@@ -263,7 +262,8 @@ go("main", 0);
 ![k](../tool/h.jpeg)
 
 This is what I did for the code as you can see, you can go back, talk to NPC, go to a new level, and reach the end. This is what I did and I have plans to change the background and texture. 
-### Progess 
+### Progress 
+So far, I have done some of my MVPs. I made levels where you can go in between them. Also added characters that can move and NPCs you can talk to. I still have to do more for my MVp like adding more textures, making it so when you talk to a customer and you give them food. This is the progress so far and we will be working on more. 
 
 
 ## EDP 
