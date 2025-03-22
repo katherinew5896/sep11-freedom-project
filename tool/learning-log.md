@@ -868,6 +868,8 @@ LL10
 So for LL10 I started making characters out of pixels, and I will make more characters in the future. We are making our own character for the project as we need to make npc, characters to play with. So as you can see in the picture. 
 
 ![k](cat.jpeg)
+![k](c3.jpeg)
+![k](table.jpeg)
 
 As you can see here, we started making characters out of using pixels. We are planning on using characters we made in the game. We found textures of the chairs and other things as you can see under here:
 <!-- 
