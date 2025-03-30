@@ -1094,7 +1094,7 @@ So for LL11 what I did was made an outline and tables where you can talk to NPCs
 `````
 ![f](a.jpeg)
 
-I added more to what I did and made more of it. This is what I did for LL11 and will be adding more levels to it.
+I added more to what I did and made more of it. This is what I did for LL11, and I will be adding more levels to it. Also will be making more characters.
 
 <!-- 
 * Links you used today (websites, videos, etc)
