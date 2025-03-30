@@ -1092,7 +1092,7 @@ So for LL11 what I did was made an outline and tables where you can talk to NPCs
     </body>
 </html>
 `````
-![](a.png)
+![f](a.jpeg)
 I added more to what I did and made more to it. 
 
 <!-- 
