@@ -1093,7 +1093,8 @@ So for LL11 what I did was made an outline and tables where you can talk to NPCs
 </html>
 `````
 ![f](a.jpeg)
-I added more to what I did and made more to it. 
+
+I added more to what I did and made more of it. This is what I did for LL11 and will be adding more levels to it.
 
 <!-- 
 * Links you used today (websites, videos, etc)
