@@ -1,238 +1,403 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- <link href="style.css" rel="stylesheet" type="text/css" /> -->
+        <title>Restaurant Adventure</title>
         <style>
-            /* CSS */
-
+            body {
+                background-color: #333;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+            }
+            #menu-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+            .menu {
+                background-color: #f5e7d5;
+                padding: 2rem;
+                border-radius: 15px;
+                text-align: center;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                max-width: 600px;
+            }
+            .game-title {
+                font-size: 3.5rem;
+                color: #8b4513;
+                margin-bottom: 1.5rem;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .btn-start {
+                background-color: #8b4513;
+                color: white;
+                font-size: 1.5rem;
+                padding: 0.8rem 2rem;
+                border: none;
+                border-radius: 10px;
+                margin: 1.5rem 0;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            .btn-start:hover {
+                background-color: #a0522d;
+                transform: scale(1.05);
+            }
+            .instructions {
+                color: #333;
+                font-size: 1.1rem;
+                margin-top: 1rem;
+                text-align: left;
+            }
         </style>
-
-        <title>Title</title>
     </head>
     <body>
-        <!-- HTML -->
-
+        <!-- Main Menu -->
+        <div id="menu-container">
+            <div class="menu">
+                <div class="game-title">Restaurant Adventure</div>
+                <button id="start-btn" class="btn-start">Start Cooking!</button>
+                <div class="instructions">
+                    <h4>How to Play:</h4>
+                    <ul>
+                        <li>Use arrow keys to move your chef around the restaurant</li>
+                        <li>Talk to customers to take their orders</li>
+                        <li>Go to the kitchen to prepare meals</li>
+                        <li>Use the stove, counter, and fridge to cook dishes</li>
+                        <li>Serve customers to earn points</li>
+                        <li>Switch between dining area and kitchen using the door</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
-  <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
+        <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
+        <script>
+            // Initialize Kaboom with larger canvas
+            const k = kaboom({
+                background: [245, 231, 213], // Creamy restaurant wall color
+                width: 2000,  // Increased canvas width
+                height: 1000,    // Increased canvas height
+                global: false
+            });
 
-<script>
-// simple rpg style walk and talk
+            // Make Kaboom functions available globally
+            const {
+                loadSprite,
+                scene,
+                addLevel,
+                rect,
+                color,
+                area,
+                body,
+                sprite,
+                scale,
+                text,
+                pos,
+                vec2,
+                z,
+                fixed,
+                anchor,
+                LEFT,
+                RIGHT,
+                UP,
+                DOWN,
+                onKeyPress,
+                onKeyDown,
+                go,
+                height,
+                width,
+                add
+            } = k;
 
-kaboom({
-	background: [74, 48, 82],
-})
+            // Remove menu and start game when start button is clicked
+            document.getElementById("start-btn").addEventListener("click", function() {
+                const menuContainer = document.getElementById("menu-container");
+                menuContainer.parentNode.removeChild(menuContainer); // Completely remove the menu
+                startGame();
+            });
 
-loadSprite("bag", "/sprites/../bag.png")
-loadSprite("ghosty", "/sprites/../ghost.png")
-loadSprite("grass", "/sprites/../grass.png")
-loadSprite("steel", "/sprites/../steel.png")
-loadSprite("door", "/sprites/../door.png")
-loadSprite("key", "/sprites/../key.png")
-loadSprite("bean", "/sprites/../bean.png")
+            function startGame() {
+                // Load restaurant-themed sprites
+                loadSprite("chef", "sprites/../c.png");
+                loadSprite("customer1", "sprites/../c1.png");
+                loadSprite("customer2", "sprites/../c2.png");
+                loadSprite("table", "sprites/../t.png");
+                loadSprite("door", "sprites/../door");
+                loadSprite("stove", "https://kaboomjs.com/logo.png");
+                loadSprite("counter", "https://kaboomjs.com/logo.png");
+                loadSprite("fridge", "https://kaboomjs.com/logo.png");
 
-scene("main", (levelIdx) => {
+                // Define restaurant characters and their dialog
+                const characters = {
+                    "c": { // Customer 1
+                        sprite: "customer1",
+                        msg: "I'd like a meal, please!",
+                    },
+                    "d": { // Customer 2
+                        sprite: "customer2",
+                        msg: "Can I get something to eat?",
+                    },
+                    "e": { // Customer 3
+                        sprite: "customer1",
+                        msg: "Just a simple dish for me, thanks!",
+                    },
+                    "m": { // Manager
+                        sprite: "customer2",
+                        msg: "Make sure the restaurant runs smoothly!",
+                    },
+                    "k": { // Kitchen staff
+                        sprite: "customer1",
+                        msg: "We need more ingredients!",
+                    }
+                };
 
-	const SPEED = 320
+                // Define larger restaurant area with kitchen level
+                const levels = [
+                    // Level 0 - Dining Area
+                    [
+                        "---------------------",
+                        "-                   -",
+                        "-  c      d       e -",
+                        "-  T      T       T -",
+                        "-                   -",
+                        "-                   -",
+                        "-         @         -",
+                        "-                   -",
+                        "-                   -",
+                        "-  T     T        T -",
+                        "-  m                -",
+                        "-                   -",
+                        "---------------------",
+                    ],
+                    // Level 1 - Kitchen Area
+                    [
+                        "---------------------",
+                        "-                   -",
+                        "-  S   C   F        -",
+                        "-                   -",
+                        "-                   -",
+                        "-                   -",
+                        "-         @         -",
+                        "-                   -",
+                        "-                   -",
+                        "-                   -",
+                        "-  k                -",
+                        "-                   -",
+                        "---------------------",
+                    ]
+                ];
 
-	// character dialog data
-	const characters = {
-		"a": {
-			sprite: "bag",
-			msg: "Hi Bean! I would like ...",
-		},
-		"b": {
-			sprite: "ghosty",
-			msg: "Who are you? You can see me??",
-		},
-	}
+                // Game variables
+                let score = 0;
+                let currentLevel = 0;
 
-	// level layouts
-	const levels = [
-		[
-			"---|--------",
-			"-     -    -",
-			"- $   -    -",
-			"-    a-    -",
-			"-     -- ---",
-			"-   @-     -",
-			"-          -",
-			"-  - - -   -",
-			"-          -",
-			"-    -     -",
-			"------------",
-		],
-		[
-			"---------",
-			"-       -",
-			"-   $   -",
-			"|       -",
-			"-    b  -",
-			"-  @    -",
-			"---------",
-		],
-	]
+                // Main game scene
+                scene("main", (levelIdx) => {
+                    const SPEED = 240;
 
-	const level = addLevel(levels[levelIdx], {
-		tileWidth: 64,
-		tileHeight: 64,
-		pos: vec2(64, 64),
-		tiles: {
-			"=": () => [
-				sprite("grass"),
-				area(),
-				body({ isStatic: true }),
-				anchor("center"),
-			],
-			"-": () => [
-				sprite("steel"),
-				area(),
-				body({ isStatic: true }),
-				anchor("center"),
-			],
-			"$": () => [
-				sprite("key"),
-				area(),
-				anchor("center"),
-				"key",
-			],
-			"@": () => [
-				sprite("bean"),
-				area(),
-				body(),
-				anchor("center"),
-				"player",
-			],
-			"|": () => [
-				sprite("door"),
-				area(),
-				body({ isStatic: true }),
-				anchor("center"),
-				"door",
-			],
-		},
-		// any() is a special function that gets called everytime there's a
-		// symbole not defined above and is supposed to return what that symbol
-		// means
-		wildcardTile(ch) {
-			const char = characters[ch]
-			if (char) {
-				return [
-					sprite(char.sprite),
-					area(),
-					body({ isStatic: true }),
-					anchor("center"),
-					"character",
-					{ msg: char.msg },
-				]
-			}
-		},
-	})
+                    // Create the level with adjusted tile size for larger area
+                    const level = addLevel(levels[levelIdx], {
+                        tileWidth: 64,
+                        tileHeight: 64,
+                        pos: vec2(64, 64),
+                        tiles: {
+                            "-": () => [
+                                rect(64, 64),
+                                color(139, 69, 19), // Wooden floor (dining) or tile (kitchen)
+                                area(),
+                                body({ isStatic: true }),
+                            ],
+                            "T": () => [
+                                sprite("table"),
+                                area(),
+                                body({ isStatic: true }),
+                                "furniture",
+                                scale(0.7) // Scaled down tables
+                            ],
+                            "@": () => [
+                                sprite("chef"),
+                                area(),
+                                body(),
+                                "chef",
+                                scale(0.5) // Scaled down chef
+                            ],
+                            // Kitchen objects
+                            "S": () => [
+                                sprite("stove"),
+                                area(),
+                                body({ isStatic: true }),
+                                "kitchen-equipment",
+                                scale(0.6),
+                                "stove"
+                            ],
+                            "C": () => [
+                                sprite("counter"),
+                                area(),
+                                body({ isStatic: true }),
+                                "kitchen-equipment",
+                                scale(0.6),
+                                "counter"
+                            ],
+                            "F": () => [
+                                sprite("fridge"),
+                                area(),
+                                body({ isStatic: true }),
+                                "kitchen-equipment",
+                                scale(0.6),
+                                "fridge"
+                            ]
+                        },
+                        wildcardTile(ch) {
+                            const char = characters[ch];
+                            if (char) {
+                                return [
+                                    sprite(char.sprite),
+                                    area(),
+                                    body({ isStatic: true }),
+                                    "character",
+                                    {
+                                        msg: char.msg
+                                    },
+                                ];
+                            }
+                        },
+                    });
 
-	// get the player game obj by tag
-	const player = level.get("player")[0]
+                    // Get the player object
+                    const chef = level.get("chef")[0];
 
-	function addDialog() {
-		const h = 160
-		const pad = 16
-		const bg = add([
-			pos(0, height() - h),
-			rect(width(), h),
-			color(0, 0, 0),
-			z(100),
-		])
-		const txt = add([
-			text("", {
-				width: width(),
-			}),
-			pos(0 + pad, height() - h + pad),
-			z(100),
-		])
-		bg.hidden = true
-		txt.hidden = true
-		return {
-			say(t) {
-				txt.text = t
-				bg.hidden = false
-				txt.hidden = false
-			},
-			dismiss() {
-				if (!this.active()) {
-					return
-				}
-				txt.text = ""
-				bg.hidden = true
-				txt.hidden = true
-			},
-			active() {
-				return !bg.hidden
-			},
-			destroy() {
-				bg.destroy()
-				txt.destroy()
-			},
-		}
-	}
+                    // Dialog system
+                    function addDialog() {
+                        const h = 120;
+                        const pad = 16;
+                        const bg = add([
+                            pos(0, height() - h),
+                            rect(width(), h),
+                            color(0, 0, 0, 200),
+                            z(100),
+                        ]);
+                        const txt = add([
+                            text("", {
+                                width: width() - pad * 2,
+                                size: 18
+                            }),
+                            pos(pad, height() - h + pad),
+                            z(100),
+                            color(255, 255, 255),
+                        ]);
+                        bg.hidden = true;
+                        txt.hidden = true;
+                        return {
+                            say(t) {
+                                txt.text = t;
+                                bg.hidden = false;
+                                txt.hidden = false;
+                            },
+                            dismiss() {
+                                if (!this.active()) return;
+                                txt.text = "";
+                                bg.hidden = true;
+                                txt.hidden = true;
+                            },
+                            active() {
+                                return !bg.hidden;
+                            },
+                        };
+                    }
 
-	let hasKey = false
-	const dialog = addDialog()
+                    const dialog = addDialog();
 
-	player.onCollide("key", (key) => {
-		destroy(key)
-		hasKey = true
-	})
+                    // Score display
+                    const scoreDisplay = add([
+                        text(`Score: ${score}`, { size: 24 }),
+                        pos(20, 20),
+                        color(0, 0, 0),
+                        z(50),
+                        fixed()
+                    ]);
 
-	player.onCollide("door", () => {
-		if (hasKey) {
-			if (levelIdx + 1 < levels.length) {
-				go("main", levelIdx + 1)
-			} else {
-				go("main", levelIdx - 1)
-			}
-		} else {
-			dialog.say("you got no key!")
-		}
-	})
+                    // Interact with characters and kitchen equipment
+                    chef.onCollide("character", (character) => {
+                        dialog.say(character.msg);
+                    });
 
-	// talk on touch
-	player.onCollide("character", (ch) => {
-		dialog.say(ch.msg)
-	})
+                    chef.onCollide("kitchen-equipment", (equipment) => {
+                        if (equipment.is("stove")) {
+                            dialog.say("Time to cook some food!");
+                        } else if (equipment.is("counter")) {
+                            dialog.say("Place prepared dishes here for serving");
+                        } else if (equipment.is("fridge")) {
+                            dialog.say("Get fresh ingredients from here");
+                        }
+                    });
 
-	const dirs = {
-		"left": LEFT,
-		"right": RIGHT,
-		"up": UP,
-		"down": DOWN,
-	}
+                    // Door to switch between levels
+                    const door = add([
+                        rect(64, 32),
+                        pos(1000 - 100, height() / 2 + 325),
+                        area(),
+                        color(139, 69, 19),
+                        "door",
+                        {
+                            targetLevel: levelIdx === 0 ? 1 : 0
+                        }
+                    ]);
 
-	for (const dir in dirs) {
-		onKeyPress(dir, () => {
-			dialog.dismiss()
-		})
-		onKeyDown(dir, () => {
-			player.move(dirs[dir].scale(SPEED))
-		})
-	}
+                    // Door label
+                    add([
+                        text(levelIdx === 0 ? "Kitchen" : "Dining Room", { size: 16 }),
+                        pos(1000 - 110, height() / 2 + 370),
+                        color(0, 0, 0)
+                    ]);
 
-})
+                    chef.onCollide("door", (d) => {
+                        go("main", d.targetLevel);
+                    });
 
-scene("win", () => {
-	add([
-		text("You Win!"),
-		pos(width() / 2, height() / 2),
-		anchor("center"),
-	])
-})
+                    // Player movement
+                    const dirs = {
+                        "left": LEFT,
+                        "right": RIGHT,
+                        "up": UP,
+                        "down": DOWN,
+                    };
+                    for (const dir in dirs) {
+                        onKeyPress(dir, () => dialog.dismiss());
+                        onKeyDown(dir, () => chef.move(dirs[dir].scale(SPEED)));
+                    }
 
-go("main", 0)
-</script>
+                    // Display area name
+                    const areaNames = ["Main Dining Area", "Kitchen"];
+                    add([
+                        text(areaNames[levelIdx], {
+                            size: 32,
+                            width: width(),
+                        }),
+                        pos(width() / 2, 30),
+                        anchor("center"),
+                        color(139, 69, 19),
+                        z(50),
+                        fixed()
+                    ]);
+                });
 
+                // Start the game
+                go("main", 0);
+            }
+        </script>
     </body>
 </html>
