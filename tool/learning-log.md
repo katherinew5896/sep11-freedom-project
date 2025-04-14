@@ -871,8 +871,231 @@ So for LL10 I started making characters out of pixels, and I will make more char
 ![k](c3.jpeg)
 ![k](table.jpeg)
 
-As you can see here, we started making characters out of using pixels. We are planning on using characters we made in the game. We found textures of the chairs and other things as you can see here:
-These are things we are planning on using during our project so for this learning log I did research on pictures that we can ad to the game and make our own characters, this is what I did for LL10 and I am planning on doing more characters. 
+As you can see here, we started making characters out of using pixels. We are planning on using characters we made in the game. We found textures of the chairs and other things, as you can see here:
+These are things we are planning on using during our project so for this learning log I did research on pictures that we can ad to the game and make our own characters. This is what I did for LL10 and I am planning on doing more characters. 
+
+LL10
+3/20/25
+
+So for LL11 what I did was made an outline and tables where you can talk to NPCs that ask for food, We added our own characters and made it look like a restaurant, so the code for this is below
+`````js
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <title>Restaurant Adventure</title>
+        <style>
+            body {
+                background-color: #333;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
+        <script>
+            // Initialize Kaboom with larger canvas
+            kaboom({
+                background: [245, 231, 213], // Creamy restaurant wall color
+                width: 1024,  // Increased canvas width
+                height: 768    // Increased canvas height
+            });
+
+            // Load restaurant-themed sprites
+            loadSprite("chef", "sprites/../c.png");
+            loadSprite("customer1", "sprites/../c1.png");
+            loadSprite("customer2", "sprites/../c3.png");
+            loadSprite("table", "sprites/../t.png");
+            loadSprite("door", "sprites/../door.png");
+
+            // Define restaurant characters and their dialog
+            const characters = {
+                "c": { // Customer 1
+                    sprite: "customer1",
+                    msg: "I'd like a meal, please!",
+                },
+                "d": { // Customer 2
+                    sprite: "customer2",
+                    msg: "Can I get something to eat?",
+                },
+                "e": { // Customer 3
+                    sprite: "customer1",
+                    msg: "Just a simple dish for me, thanks!",
+                },
+                "m": { // Manager
+                    sprite: "customer2",
+                    msg: "Make sure the restaurant runs smoothly!",
+                }
+            };
+
+            // Define larger restaurant area
+            const levels = [
+                // Expanded level - Dining Area
+                [
+                    "----------------------",
+                    "-                   -",
+                    "-  c      d       e -",
+                    "-  T      T       T -",
+                    "-                   -",
+                    "-                   -",
+                    "-         @         -",
+                    "-                   -",
+                    "-                   -",
+                    "-  T     T        T -",
+                    "-  m               -",
+                    "-                   -",
+                    "----------------------",
+                ]
+            ];
+
+            // Game variables
+            let score = 0;
+
+            // Main game scene
+            scene("main", (levelIdx) => {
+                const SPEED = 240;
+
+                // Create the level with adjusted tile size for larger area
+                const level = addLevel(levels[levelIdx], {
+                    tileWidth: 64,
+                    tileHeight: 64,
+                    pos: vec2(64, 64),
+                    tiles: {
+                        "-": () => [
+                            rect(64, 64),
+                            color(139, 69, 19), // Wooden floor
+                            area(),
+                            body({ isStatic: true }),
+                        ],
+                        "T": () => [
+                            sprite("table"),
+                            area(),
+                            body({ isStatic: true }),
+                            "furniture",
+                            scale(0.7) // Scaled down tables
+                        ],
+                        "@": () => [
+                            sprite("chef"),
+                            area(),
+                            body(),
+                            "chef",
+                            scale(0.5) // Scaled down chef
+                        ]
+                    },
+                    wildcardTile(ch) {
+                        const char = characters[ch];
+                        if (char) {
+                            return [
+                                sprite(char.sprite),
+                                area(),
+                                body({ isStatic: true }),
+                                "character",
+                                {
+                                    msg: char.msg
+                                },
+                            ];
+                        }
+                    },
+                });
+
+                // Get the player object
+                const chef = level.get("chef")[0];
+
+                // Dialog system
+                function addDialog() {
+                    const h = 120;
+                    const pad = 16;
+                    const bg = add([
+                        pos(0, height() - h),
+                        rect(width(), h),
+                        color(0, 0, 0, 200),
+                        z(100),
+                    ]);
+                    const txt = add([
+                        text("", {
+                            width: width() - pad * 2,
+                            size: 18
+                        }),
+                        pos(pad, height() - h + pad),
+                        z(100),
+                        color(255, 255, 255),
+                    ]);
+                    bg.hidden = true;
+                    txt.hidden = true;
+                    return {
+                        say(t) {
+                            txt.text = t;
+                            bg.hidden = false;
+                            txt.hidden = false;
+                        },
+                        dismiss() {
+                            if (!this.active()) return;
+                            txt.text = "";
+                            bg.hidden = true;
+                            txt.hidden = true;
+                        },
+                        active() {
+                            return !bg.hidden;
+                        },
+                    };
+                }
+
+                const dialog = addDialog();
+
+                // Score display
+                const scoreDisplay = add([
+                    text(`Score: ${score}`, { size: 24 }),
+                    pos(20, 20),
+                    color(0, 0, 0),
+                    z(50),
+                    fixed()
+                ]);
+
+                // Interact with customers
+                chef.onCollide("character", (customer) => {
+                    dialog.say(customer.msg);
+                });
+
+                // Player movement
+                const dirs = {
+                    "left": LEFT,
+                    "right": RIGHT,
+                    "up": UP,
+                    "down": DOWN,
+                };
+                for (const dir in dirs) {
+                    onKeyPress(dir, () => dialog.dismiss());
+                    onKeyDown(dir, () => chef.move(dirs[dir].scale(SPEED)));
+                }
+
+                // Display area name
+                const areaNames = ["Main Dining Area"];
+                add([
+                    text(areaNames[levelIdx], {
+                        size: 32,
+                        width: width(),
+                    }),
+                    pos(width() / 2, 30),
+                    anchor("center"),
+                    color(139, 69, 19),
+                    z(50),
+                    fixed()
+                ]);
+            });
+
+            // Start the game
+            go("main", 0);
+        </script>
+    </body>
+</html>
+`````
+![f](a.jpeg)
+
+I added more to what I did and made more of it. This is what I did for LL11, and I will be adding more levels to it. Also will be making more characters.
+
 <!-- 
 * Links you used today (websites, videos, etc)
 * Things you tried, progress you made, etc
