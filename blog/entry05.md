@@ -630,9 +630,14 @@ This year we had the Freedom Project, our year-long project for Sep. I have been
 </html>
 `````
 This is the code for my project, which is like a cooking game and an adventure game. It is like the anime where they die and pick a class. This is what I base my project off of. Pictures of this would be 
-
+![k](../tool/k1.jpeg)
+![k](../tool/k2.jpeg)
+![k](../tool/kk.jpeg)
+![k](../tool/k1k.jpeg)
+These are different levels of the game. 
 
 ## EDP 
+As you can see, we have done the prototype and were able to make everything work for our game. We just need to make improvements to the game, which is the part I am on. 
 
 
 ## Skills
