@@ -2,9 +2,9 @@
 ##### 3/16/25
 
 ### content
-This year we had the Freedom Project, our year-long project for Sep. I have been learning the tool I used, which is kaboom in many ways. As I said before one of these websites for learning is the [kaboom website](https://kaboomjs.com/) in this website you can see how different codes are used and you can see the games that they made. This is where I do most of my tinkering and find codes that could help in the future. Another thing I used for learning was YouTube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log which is where my notes are for the codes I learned. We have reached the end of this project, which in my blog 5, I will talk about the progress we have made, what we have achieved, and many more. The code and pictures of is down:
+This year we had the Freedom Project, our year-long project for Sep. I have been learning the tool I used, which is Kaboom, in many ways. As I said before, one of these websites for learning is the [kaboom website](https://kaboomjs.com/). On this website, you can see how different codes are used, and you can see the games that they made. This is where I do most of my tinkering and find code that could help in the future. Another thing I used for learning was YouTube videos like [making a game with Kaboom](https://www.youtube.com/watch?v=hgReGsh5xVU) [learning log.md](../tool/learning-log.md). This is the learning log, which is where my notes are for the code I learned. We have reached the end of this project, which in my blog 5, I will talk about the progress we have made, what we have achieved, and many more. The code and pictures are down:
 ### work
-`````js
+````` js
 <!DOCTYPE html>
 <html>
     <head>
@@ -637,17 +637,14 @@ This is the code for my project, which is like a cooking game and an adventure g
 These are different levels of the game. 
 
 ## EDP 
-As you can see, we have done the prototype and were able to make everything work for our game. We just need to make improvements to the game, which is the part I am on. 
-
+As you can see, we have done the prototype and were able to make everything work for our game. We just need to make improvements to the game, which is the part I am on. The game works, but it isn't the best, so we need to change some stuff and make it work better for the people. Also, for improving the game, we wanted to add more, maybe the people can cook, and there is a  monster to fight. For every game, there is always improvement, just like ours, and I need to make those changes to the game. So this is the part of the Engineering Design process I am on, and this time, and will be adding improvements to it. 
+ 
 
 ## Skills
 
 
 
 
-[Previous](entry03.md) | [Next](entry05.md)
-
-[Home](../README.md)
 
 [Previous](entry04.md) | [Next](entry06.md)
 
