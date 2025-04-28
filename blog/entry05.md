@@ -641,7 +641,9 @@ As you can see, we have done the prototype and were able to make everything work
  
 
 ## Skills
-
+1. First skill I needed to work on was researching what my project was going to contain and be something original but also based off things that people would like to play on a daily basis. I looked around and found star dew valley and thought it was pretty similar to my project since its about finding resources and has different objectives. I looked on youtube about the basic codes and such and found pydew valley which goes over python which i thought was cool and found some p5js as well to create a base or starting point for my project. It was difficult for me to research especially if i keep seeing the same things over and over again, but knowing that it will contribute to my project made me search deeper to try and find help with parts of my project i was stuck on.
+2. My second skill was time management especially with the MVP that we had to do and also progressing with the project. Also with other classes clashing in between, i had to have set times for what classes homework I had to do and which was on my priority list. Having to juggle everything with a steady pace was quite challenging, but having a clear mind and calm attitude about things made it easier for me to focus on one thing and put my best work into it. Ofcourse having working with someone else on my project meant I had to do my parts in order to keep up with the dates, so it doesn't affect my partner.
+3. My third skill was communicating with my partner since we work in the project together, we needed to communicate especially on how we needed to do things to complete the goals we had for this project. It was a bit difficult when we did our own things since we and different ideas on what to incorporate into our project. The fastest way to fix a problem or misunderstanding is to communicate what we wanted to do and then to find a middle ground
 
 
 
