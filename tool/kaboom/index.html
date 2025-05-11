@@ -76,6 +76,7 @@
                         <li>Talk to customers to take their orders</li>
                         <li>Go to the kitchen to prepare meals</li>
                         <li>Use the stove, counter, and fridge to cook dishes</li>
+                        <li>Press 'E' to interact with objects and customers</li>
                         <li>Serve customers to earn points</li>
                         <li>Switch between dining area and kitchen using the door</li>
                     </ul>
@@ -120,52 +121,91 @@
                 go,
                 height,
                 width,
-                add
+                add,
+                destroy,
+                loop,
+                get,
+                onSceneLeave
             } = k;
 
             // Remove menu and start game when start button is clicked
             document.getElementById("start-btn").addEventListener("click", function() {
                 const menuContainer = document.getElementById("menu-container");
-                menuContainer.parentNode.removeChild(menuContainer); // Completely remove the menu
+                menuContainer.parentNode.removeChild(menuContainer);
                 startGame();
             });
 
             function startGame() {
+                // Game variables
+                let score = 0;
+                let currentOrder = null;
+                let holdingItem = null;
+                let cookingProgress = 0;
+                let currentRecipe = null;
+                let cookingTimer = null;
+
                 // Load restaurant-themed sprites
                 loadSprite("chef", "sprites/../c.png");
                 loadSprite("customer1", "sprites/../c1.png");
-                loadSprite("customer2", "sprites/../c2.png");
-                loadSprite("table", "sprites/../t.png");
-                loadSprite("door", "sprites/../door");
-                loadSprite("stove", "https://kaboomjs.com/logo.png");
-                loadSprite("counter", "https://kaboomjs.com/logo.png");
-                loadSprite("fridge", "https://kaboomjs.com/logo.png");
+                loadSprite("customer2", "sprites/../c3.png");
+                loadSprite("table", "sprites/../table.png");
+                loadSprite("door", "sprites/../door.png");
+                loadSprite("stove", "sprites/../stove.png");
+                loadSprite("counter", "sprites/../c4.png");
+                loadSprite("fridge", "sprites/../fridge.png");
+                loadSprite("plate", "sprites/../plate.png");
+                loadSprite("burger", "sprites/../burger.png");
+                loadSprite("pizza", "sprites/../pizza.png");
+                loadSprite("salad", "sprites/../salad.png");
+                loadSprite("steak", "sprites/../steak.png");
 
                 // Define restaurant characters and their dialog
                 const characters = {
                     "c": { // Customer 1
                         sprite: "customer1",
-                        msg: "I'd like a meal, please!",
+                        msg: "I'd like a burger, please!",
+                        order: "burger",
+                        served: false
                     },
                     "d": { // Customer 2
                         sprite: "customer2",
-                        msg: "Can I get something to eat?",
+                        msg: "Can I get a pizza?",
+                        order: "pizza",
+                        served: false
                     },
                     "e": { // Customer 3
                         sprite: "customer1",
-                        msg: "Just a simple dish for me, thanks!",
-                    },
-                    "m": { // Manager
-                        sprite: "customer2",
-                        msg: "Make sure the restaurant runs smoothly!",
-                    },
-                    "k": { // Kitchen staff
-                        sprite: "customer1",
-                        msg: "We need more ingredients!",
+                        msg: "Just a salad for me, thanks!",
+                        order: "salad",
+                        served: false
                     }
                 };
 
-                // Define larger restaurant area with kitchen level
+                // Define recipes for dishes
+                const recipes = {
+                    "burger": {
+                        ingredients: ["patty", "bun", "lettuce"],
+                        cookTime: 3,
+                        points: 10
+                    },
+                    "pizza": {
+                        ingredients: ["dough", "cheese", "tomato"],
+                        cookTime: 5,
+                        points: 15
+                    },
+                    "salad": {
+                        ingredients: ["lettuce", "tomato", "cucumber"],
+                        cookTime: 2,
+                        points: 8
+                    },
+                    "steak": {
+                        ingredients: ["beef", "potatoes", "butter"],
+                        cookTime: 7,
+                        points: 20
+                    }
+                };
+
+                // Define restaurant areas
                 const levels = [
                     // Level 0 - Dining Area
                     [
@@ -179,7 +219,7 @@
                         "-                   -",
                         "-                   -",
                         "-  T     T        T -",
-                        "-  m                -",
+                        "-                   -",
                         "-                   -",
                         "---------------------",
                     ],
@@ -195,21 +235,17 @@
                         "-                   -",
                         "-                   -",
                         "-                   -",
-                        "-  k                -",
+                        "-                   -",
                         "-                   -",
                         "---------------------",
                     ]
                 ];
 
-                // Game variables
-                let score = 0;
-                let currentLevel = 0;
-
                 // Main game scene
                 scene("main", (levelIdx) => {
                     const SPEED = 240;
 
-                    // Create the level with adjusted tile size for larger area
+                    // Create the level
                     const level = addLevel(levels[levelIdx], {
                         tileWidth: 64,
                         tileHeight: 64,
@@ -217,7 +253,7 @@
                         tiles: {
                             "-": () => [
                                 rect(64, 64),
-                                color(139, 69, 19), // Wooden floor (dining) or tile (kitchen)
+                                color(139, 69, 19),
                                 area(),
                                 body({ isStatic: true }),
                             ],
@@ -226,16 +262,15 @@
                                 area(),
                                 body({ isStatic: true }),
                                 "furniture",
-                                scale(0.7) // Scaled down tables
+                                scale(0.7)
                             ],
                             "@": () => [
                                 sprite("chef"),
                                 area(),
                                 body(),
                                 "chef",
-                                scale(0.5) // Scaled down chef
+                                scale(0.5)
                             ],
-                            // Kitchen objects
                             "S": () => [
                                 sprite("stove"),
                                 area(),
@@ -270,14 +305,16 @@
                                     body({ isStatic: true }),
                                     "character",
                                     {
-                                        msg: char.msg
+                                        msg: char.msg,
+                                        order: char.order,
+                                        served: char.served,
+                                        characterId: ch
                                     },
                                 ];
                             }
                         },
                     });
 
-                    // Get the player object
                     const chef = level.get("chef")[0];
 
                     // Dialog system
@@ -330,20 +367,176 @@
                         fixed()
                     ]);
 
-                    // Interact with characters and kitchen equipment
-                    chef.onCollide("character", (character) => {
-                        dialog.say(character.msg);
-                    });
+                    // Order display
+                    const orderDisplay = add([
+                        text("Current Order: None", { size: 24 }),
+                        pos(20, 60),
+                        color(0, 0, 0),
+                        z(50),
+                        fixed()
+                    ]);
 
-                    chef.onCollide("kitchen-equipment", (equipment) => {
-                        if (equipment.is("stove")) {
-                            dialog.say("Time to cook some food!");
-                        } else if (equipment.is("counter")) {
-                            dialog.say("Place prepared dishes here for serving");
-                        } else if (equipment.is("fridge")) {
-                            dialog.say("Get fresh ingredients from here");
+                    // Held item display
+                    const heldItemDisplay = add([
+                        text("Holding: Nothing", { size: 24 }),
+                        pos(20, 100),
+                        color(0, 0, 0),
+                        z(50),
+                        fixed()
+                    ]);
+
+                    // Cooking progress display (only in kitchen)
+                    const cookingProgressDisplay = levelIdx === 1 ? add([
+                        text("", { size: 24 }),
+                        pos(width() - 300, 20),
+                        color(0, 0, 0),
+                        z(50),
+                        fixed()
+                    ]) : null;
+
+                    function updateHeldItemDisplay() {
+                        heldItemDisplay.text = `Holding: ${holdingItem || "Nothing"}`;
+                    }
+
+                    function updateOrderDisplay() {
+                        orderDisplay.text = `Current Order: ${currentOrder || "None"}`;
+                    }
+
+                    function updateCookingProgress() {
+                        if (cookingProgressDisplay && currentRecipe) {
+                            const progressPercent = Math.floor((cookingProgress / currentRecipe.cookTime) * 100);
+                            cookingProgressDisplay.text = `Cooking: ${currentOrder} (${progressPercent}%)`;
+                        } else if (cookingProgressDisplay) {
+                            cookingProgressDisplay.text = "";
                         }
-                    });
+                    }
+
+// Interact with characters and kitchen equipment
+onKeyPress("e", () => {
+    if (dialog.active()) {
+        dialog.dismiss();
+        return;
+    }
+
+    // Get all collisions and check for tags in a different way
+    const collisions = chef.getCollisions();
+
+    // Check for nearby characters to interact with
+    const nearbyChars = collisions.filter(c => {
+        // Check if the object has the character data property we added
+        return c.characterId && levelIdx === 0;
+    });
+
+    if (nearbyChars.length > 0) {
+        const char = nearbyChars[0];
+        if (!char.served) {
+            if (holdingItem && holdingItem === char.order) {
+                // Serve the dish
+                score += recipes[char.order].points;
+                scoreDisplay.text = `Score: ${score}`;
+                dialog.say("Thank you! Here's your payment.");
+                char.served = true;
+                holdingItem = null;
+                updateHeldItemDisplay();
+
+                // Remove the served dish
+                const plates = get("plate");
+                if (plates.length > 0) {
+                    destroy(plates[0]);
+                }
+            } else if (!currentOrder) {
+                // Take order
+                currentOrder = char.order;
+                dialog.say(`Order received: ${char.order}`);
+                updateOrderDisplay();
+            } else {
+                dialog.say("Please complete the current order first!");
+            }
+        } else {
+            dialog.say("Thanks for the great service!");
+        }
+    }
+
+    // Check for kitchen equipment to interact with
+    const nearbyEquipment = collisions.filter(c => {
+        // Check for specific equipment tags we added
+        return (c.isStove || c.isCounter || c.isFridge) && levelIdx === 1;
+    });
+
+    if (nearbyEquipment.length > 0) {
+        const equipment = nearbyEquipment[0];
+
+        if (equipment.isFridge) {
+            if (!currentOrder) {
+                dialog.say("You need to take an order first!");
+            } else if (!currentRecipe) {
+                currentRecipe = recipes[currentOrder];
+                dialog.say(`Got ingredients for ${currentOrder}! Now cook it on the stove.`);
+            } else {
+                dialog.say("You already have ingredients for the current order.");
+            }
+        }
+
+        if (equipment.isStove) {
+            if (!currentRecipe) {
+                dialog.say("You need to get ingredients from the fridge first!");
+            } else if (cookingTimer) {
+                dialog.say("Already cooking something!");
+            } else {
+                dialog.say(`Cooking ${currentOrder}... This will take ${currentRecipe.cookTime} seconds.`);
+
+                // Start cooking process
+                cookingProgress = 0;
+                updateCookingProgress();
+
+                cookingTimer = loop(1, () => {
+                    cookingProgress += 1;
+                    updateCookingProgress();
+
+                    if (cookingProgress >= currentRecipe.cookTime) {
+                        // Cooking complete
+                        cookingTimer.cancel();
+                        cookingTimer = null;
+                        dialog.say(`${currentOrder} is ready! Plate it on the counter.`);
+                        holdingItem = currentOrder;
+                        updateHeldItemDisplay();
+                        currentRecipe = null;
+                        updateCookingProgress();
+                    }
+                });
+            }
+        }
+
+        if (equipment.isCounter) {
+            if (holdingItem) {
+                // Create a plate with the food
+                add([
+                    sprite("plate"),
+                    pos(equipment.pos.x + 20, equipment.pos.y - 30),
+                    scale(0.5),
+                    "plate",
+                    {
+                        food: holdingItem
+                    }
+                ]);
+
+                // Add the food sprite on top of the plate
+                add([
+                    sprite(holdingItem),
+                    pos(equipment.pos.x + 20, equipment.pos.y - 30),
+                    scale(0.3),
+                    z(10)
+                ]);
+
+                dialog.say(`Plated ${holdingItem} ready for serving!`);
+                holdingItem = null;
+                updateHeldItemDisplay();
+            } else {
+                dialog.say("Nothing to plate. Cook something first!");
+            }
+        }
+    }
+});
 
                     // Door to switch between levels
                     const door = add([
@@ -365,6 +558,11 @@
                     ]);
 
                     chef.onCollide("door", (d) => {
+                        // Cancel cooking timer if switching levels
+                        if (cookingTimer) {
+                            cookingTimer.cancel();
+                            cookingTimer = null;
+                        }
                         go("main", d.targetLevel);
                     });
 
@@ -400,4 +598,3 @@
             }
         </script>
     </body>
-</html>
