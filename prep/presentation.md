@@ -1,13 +1,14 @@
 # Presentation Plan
 
 ## Hook
-* 
+* Who likes cooking and adventure games? Well if you want a new experience like fighting bears in forests for resources to cook in your restuarant then try our cooking game!
 
 ## Product
 * 
 
 ## Process
-* 
+* planned on what type of game we will create
+* learned p5js and used it to create a basic outline of our game design
 
 ## Conclusion
 * 
