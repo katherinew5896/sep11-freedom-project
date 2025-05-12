@@ -1,17 +1,18 @@
 # Presentation Plan
 
 ## Hook
-* Who likes cooking and adventure games? Well if you want a new experience like fighting bears in forests for resources to cook in your restuarant then try our cooking game!
+* Who likes cooking and adventure games? If you want a new experience like fighting bears in forests for resources to cook in your restaurant, try our cooking game!
 
 ## Product
-* 
+* We made a game where you can choose to be a chef or an adventurer. We are going to show a Demo and example it. 
 
 ## Process
 * planned on what type of game we will create
-* learned p5js and used it to create a basic outline of our game design
+* learned p5.js and used it to create a basic outline of our game design
 
 ## Conclusion
-* 
+* less = more. I spend too much time trying many things simultaneously, which doesn't work out.
+* Ask friends for help. When I wasn't sure how to get my characters to load in, I asked my friends and found what I did wrong in the code.
 
 <!-- EXAMPLE
 
@@ -22,7 +23,7 @@
 * GIF/Demo of example/non-example
 
 ## Process
-* Flowchart of plan
+* Flowchart of the plan
   * MVP: noun -> door -> yes/no
   * Beyond MVP: noun -> word relation API -> noun API -> yes/no, with counterexample
 * Code snippets of:
