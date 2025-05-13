@@ -5,7 +5,9 @@
 
 ## Product
 * We made a game where you can choose to be a chef or an adventurer. We are going to show a Demo and example it.
-* Code snippets of 
+* Code snippets of
+  `````js
+  
 
 ## Process
 * planned on what type of game we will create
