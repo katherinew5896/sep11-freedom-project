@@ -4,7 +4,8 @@
 * Who likes cooking and adventure games? If you want a new experience like fighting bears in forests for resources to cook in your restaurant, try our cooking game!
 
 ## Product
-* We made a game where you can choose to be a chef or an adventurer. We are going to show a Demo and example it. 
+* We made a game where you can choose to be a chef or an adventurer. We are going to show a Demo and example it.
+* Code snippets of 
 
 ## Process
 * planned on what type of game we will create
