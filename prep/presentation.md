@@ -31,7 +31,34 @@
                             }
                         }
   `````
-  This is for how the scoring works and how I used if statements. 
+  This is for how the scoring works and how I used if statements.
+
+
+  ````` js
+                loadSprite("chef", sprites/../c.png");
+                loadSprite("adventurer", sprites/../c.png");
+                loadSprite("customer1", sprites/../c1.png");
+                loadSprite("customer2", sprites/../c3.png");
+                loadSprite("table", sprites/../table.png");
+                loadSprite("door", sprites/../door.png");
+                loadSprite("stove", sprites/../stove.png");
+                loadSprite("counter", sprites/../c4.png");
+                loadSprite("fridge", sprites/../fridge.png");
+                loadSprite("plate", sprites/../plate.png");
+                loadSprite("food", sprites/../food.png");
+
+                // Adventurer-specific sprites
+                loadSprite("quest-giver", sprites/../c1.png");
+                loadSprite("treasure", sprites/../treasure.png");
+                loadSprite("ingredient", sprites/../ingredient.png");
+                loadSprite("portal", sprites/../door.png");
+                loadSprite("monster", sprites/../c3.png");
+                loadSprite("forest-tree", sprites/../tree.png");
+                loadSprite("mountain", sprites/../mountain.png");
+                loadSprite("castle", sprites/../castle.png");
+                loadSprite("sword", sprites/../sword.png");
+
+  ````` As you can see here, the code might look fine but the sprites didn't load. I found out that I was missing a " after the ,.
   
 
 ## Process
