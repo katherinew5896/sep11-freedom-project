@@ -7,6 +7,31 @@
 * We made a game where you can choose to be a chef or an adventurer. We are going to show a Demo and example it.
 * Code snippets of
   `````js
+  if (playerRole === "adventurer") {
+                            if (character.type === "t") { // Treasure
+                                score += 50;
+                                scoreDisplay.text = `Adventure Score: ${score}`;
+                                play("coin");
+                                destroy(character);
+                            } else if (character.type === "i") { // Ingredient
+                                score += 20;
+                                ingredientsCollected++;
+                                scoreDisplay.text = `Adventure Score: ${score}`;
+                                play("coin");
+                                destroy(character);
+
+                                // Check if all ingredients collected
+                                if (ingredientsCollected >= totalIngredientsNeeded) {
+                                    dialog.say("Congratulations! You found all legendary ingredients!");
+                                    playerMaxHealth += 50;
+                                    playerDamage += 10;
+                                }
+                            } else if (character.type === "m") { // Monster
+                                // Monster interaction handled in combat system
+                            }
+                        }
+  `````
+  This is for how the scoring works and how I used if statements. 
   
 
 ## Process
