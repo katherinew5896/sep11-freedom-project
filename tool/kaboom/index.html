@@ -100,7 +100,8 @@
                     <ul>
                         <li>Explore a culinary fantasy world</li>
                         <li>Discover legendary recipes</li>
-                        <li>Battle food monsters (Press 'F' to attack)</li>
+                        <li>Battle food monsters (Press 'F' to melee attack)</li>
+                        <li>Press SPACE to shoot projectiles</li>
                         <li>Complete epic cooking quests</li>
                         <li>Collect ingredients to upgrade your skills</li>
                     </ul>
@@ -111,6 +112,7 @@
                         <li>Use arrow keys to move your character</li>
                         <li>Press 'E' to interact with objects and people</li>
                         <li>Switch between areas using doors/portals</li>
+                        <li>Adventurer: SPACE to shoot, F to melee</li>
                     </ul>
                 </div>
             </div>
@@ -165,7 +167,8 @@
                 burp,
                 play,
                 loadSound,
-                outline
+                outline,
+                circle
             } = k;
 
             // Role selection
@@ -226,6 +229,7 @@
                 loadSound("coin", "sounds/coin.mp3");
                 loadSound("attack", "sounds/attack.mp3");
                 loadSound("hurt", "sounds/hurt.mp3");
+                loadSound("shoot", "sounds/shoot.mp3");
 
                 // Define characters and their dialog based on role
                 const chefCharacters = {
@@ -261,10 +265,13 @@
                         msg: "A wild Food Monster appears!",
                         health: 100,
                         maxHealth: 100,
-                        damage: 15, // Increased damage
-                        speed: 800, // Increased speed
-                        attackCooldown: 1, // Reduced cooldown
-                        chaseRange: 300 // How far they can detect player
+                        damage: 15,
+                        speed: 800,
+                        attackCooldown: 1,
+                        chaseRange: 300,
+                        shootCooldown: 2,
+                        projectileSpeed: 200,
+                        projectileDamage: 10
                     }
                 };
 
@@ -387,6 +394,7 @@
                 let playerMaxHealth = 100;
                 let playerDamage = 20;
                 let playerAttackCooldown = 0;
+                let playerShootCooldown = 0;
                 let monsters = [];
                 let attackHitbox = null;
 
@@ -404,7 +412,7 @@
                         tiles: {
                             "-": () => [
                                 rect(64, 64),
-                                color(playerRole === "chef" ? [139, 69, 19] : [34, 139, 34]), // Different floor colors
+                                color(playerRole === "chef" ? [139, 69, 19] : [34, 139, 34]),
                                 area(),
                                 body({ isStatic: true }),
                             ],
@@ -424,7 +432,8 @@
                                 {
                                     facing: "down",
                                     isAttacking: false,
-                                    attackCooldown: 0
+                                    attackCooldown: 0,
+                                    shootCooldown: 0
                                 }
                             ],
                             // Chef-specific objects
@@ -518,7 +527,11 @@
                                         speed: char.speed,
                                         attackCooldown: char.attackCooldown,
                                         chaseRange: char.chaseRange,
+                                        shootCooldown: char.shootCooldown,
+                                        projectileSpeed: char.projectileSpeed,
+                                        projectileDamage: char.projectileDamage,
                                         lastAttackTime: 0,
+                                        lastShotTime: 0,
                                         isAggressive: true,
                                         isAlive: true
                                     });
@@ -545,26 +558,26 @@
 
                     // Improved Dialog system with better visibility
                     function addDialog() {
-                        const h = 150; // Taller dialog box
-                        const pad = 30; // More padding
+                        const h = 150;
+                        const pad = 30;
                         const bg = add([
                             pos(0, height() - h),
                             rect(width(), h),
-                            color(0, 0, 0, 0.9), // More opaque background
+                            color(0, 0, 0, 0.9),
                             z(100),
                             fixed()
                         ]);
                         const txt = add([
                             text("", {
                                 width: width() - pad * 2,
-                                size: 32, // Larger font size
+                                size: 32,
                                 font: "sans-serif",
-                                align: "center", // Center aligned text
+                                align: "center",
                             }),
                             pos(width()/2, height() - h + pad),
                             anchor("center"),
-                            color(255, 255, 255), // White text
-                            outline(4, color(0, 0, 0)), // Black outline for better contrast
+                            color(255, 255, 255),
+                            outline(4, color(0, 0, 0)),
                             z(100),
                             fixed()
                         ]);
@@ -606,7 +619,8 @@
                             pos(20, 60),
                             color(0, 0, 0),
                             z(50),
-                            fixed()
+                            fixed(),
+                            "health-display"
                         ]);
                     }
 
@@ -636,7 +650,8 @@
                             pos(20, 100),
                             color(0, 0, 0),
                             z(50),
-                            fixed()
+                            fixed(),
+                            "upgrades-display"
                         ]);
                     }
 
@@ -730,7 +745,7 @@
                             "door",
                             {
                                 targetLevel: levelIdx === 0 ? 1 : 0,
-                                areaName: levelIdx === 0 ? "Kitchen" : "Dining Room"
+                                areaName: levelIdx === 0 ? " " : " "
                             }
                         ]);
 
@@ -764,7 +779,7 @@
 
                     // Combat system for adventurer
                     if (playerRole === "adventurer") {
-                        // Attack with 'F' key
+                        // Melee attack with 'F' key
                         onKeyPress("f", () => {
                             if (player.isAttacking || player.attackCooldown > 0) return;
 
@@ -806,11 +821,54 @@
                             });
                         });
 
+                        // Ranged attack with SPACE key
+                        onKeyPress("space", () => {
+                            if (player.shootCooldown > 0) return;
+
+                            play("shoot");
+                            player.shootCooldown = 0.5;
+
+                            // Determine direction
+                            const direction = {
+                                left: vec2(-1, 0),
+                                right: vec2(1, 0),
+                                up: vec2(0, -1),
+                                down: vec2(0, 1)
+                            }[player.facing];
+
+                            // Create projectile
+                            const projectile = add([
+                                circle(10),
+                                pos(player.pos),
+                                color(255, 0, 0),
+                                area(),
+                                "player-projectile",
+                                {
+                                    speed: 400,
+                                    direction: direction,
+                                    damage: 15,
+                                    lifespan: 2,
+                                    timer: 0
+                                }
+                            ]);
+
+                            // Projectile movement
+                            loop(0.1, () => {
+                                if (!projectile.exists()) return;
+                                projectile.move(projectile.direction.scale(projectile.speed));
+                                projectile.timer += 0.1;
+
+                                if (projectile.timer >= projectile.lifespan) {
+                                    destroy(projectile);
+                                }
+                            });
+                        });
+
                         // Monster behavior
                         const monsters = level.get("character").filter(c => c.type === "m");
                         monsters.forEach(monster => {
-                            // More aggressive monster movement towards player
-                            loop(0.1, () => { // More frequent updates
+                            // Monster movement towards player
+                            loop(0.1, () => {
                                 if (!monster.isAlive) return;
 
                                 // Only chase if player is within range
@@ -820,7 +878,7 @@
                                 }
                             });
 
-                            // Monster attacks more frequently
+                            // Monster melee attacks
                             loop(0.1, () => {
                                 if (!monster.isAlive || monster.attackCooldown > 0) return;
 
@@ -846,7 +904,44 @@
                                 }
                             });
 
-                            // Monster takes damage
+                            // Monster ranged attacks
+                            loop(1, () => {
+                                if (!monster.isAlive || monster.shootCooldown > 0) return;
+
+                                if (monster.pos.dist(player.pos) < 500) {
+                                    monster.shootCooldown = 3;
+
+                                    // Create monster projectile
+                                    const direction = player.pos.sub(monster.pos).unit();
+                                    const projectile = add([
+                                        circle(10),
+                                        pos(monster.pos),
+                                        color(0, 0, 255),
+                                        area(),
+                                        "monster-projectile",
+                                        {
+                                            speed: monster.projectileSpeed,
+                                            direction: direction,
+                                            damage: monster.projectileDamage,
+                                            lifespan: 3,
+                                            timer: 0
+                                        }
+                                    ]);
+
+                                    // Projectile movement
+                                    loop(0.1, () => {
+                                        if (!projectile.exists()) return;
+                                        projectile.move(projectile.direction.scale(projectile.speed));
+                                        projectile.timer += 0.1;
+
+                                        if (projectile.timer >= projectile.lifespan) {
+                                            destroy(projectile);
+                                        }
+                                    });
+                                }
+                            });
+
+                            // Monster takes damage from melee
                             monster.onCollide("attack", () => {
                                 if (!monster.isAlive) return;
 
@@ -861,6 +956,45 @@
                                     destroy(monster);
                                 }
                             });
+
+                            // Monster takes damage from projectiles
+                            monster.onCollide("player-projectile", (projectile) => {
+                                if (!monster.isAlive) return;
+
+                                monster.health -= projectile.damage;
+                                play("hurt");
+                                destroy(projectile);
+
+                                if (monster.health <= 0) {
+                                    monster.isAlive = false;
+                                    score += 30;
+                                    scoreDisplay.text = `Adventure Score: ${score}`;
+                                    dialog.say("You defeated the Food Monster! +30 points");
+                                    destroy(monster);
+                                }
+                            });
+                        });
+
+                        // Player takes damage from monster projectiles
+                        player.onCollide("monster-projectile", (projectile) => {
+                            playerHealth -= projectile.damage;
+                            play("hurt");
+                            camShake(5);
+                            destroy(projectile);
+
+                            // Update health display
+                            get("health-display").forEach(h => {
+                                h.text = `Health: ${playerHealth}/${playerMaxHealth}`;
+                            });
+
+                            if (playerHealth <= 0) {
+                                dialog.say("Game Over! Refresh to try again.");
+                                // Disable player controls
+                                for (const dir in dirs) {
+                                    onKeyRelease(dir, () => {});
+                                    onKeyDown(dir, () => {});
+                                }
+                            }
                         });
                     }
 
@@ -945,9 +1079,26 @@
 
                     // Cooldown system
                     loop(0.1, () => {
+                        // Melee attack cooldown
                         if (player.attackCooldown > 0) {
                             player.attackCooldown -= 0.1;
                         }
+
+                        // Shoot cooldown
+                        if (player.shootCooldown > 0) {
+                            player.shootCooldown -= 0.1;
+                        }
+
+                        // Monster cooldowns
+                        const monsters = level.get("character").filter(c => c.type === "m");
+                        monsters.forEach(monster => {
+                            if (monster.attackCooldown > 0) {
+                                monster.attackCooldown -= 0.1;
+                            }
+                            if (monster.shootCooldown > 0) {
+                                monster.shootCooldown -= 0.1;
+                            }
+                        });
 
                         // Update attack hitbox position
                         if (attackHitbox) {
@@ -969,12 +1120,12 @@
                     });
 
                     // Display area name
-                    const chefAreaNames = ["Main Dining Area", "Kitchen"];
+                    const chefAreaNames = ["  ", " "];
                     const adventurerAreaNames = [
-                        "Culinary Village",
-                        "Enchanted Forest",
-                        "Spice Mountains",
-                        "Royal Kitchen Castle"
+                        " ",
+                        " ",
+                        " ",
+                        " "
                     ];
 
                     add([
