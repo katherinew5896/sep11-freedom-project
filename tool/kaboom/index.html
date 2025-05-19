@@ -91,6 +91,8 @@
                         <li>Cook meals for customers</li>
                         <li>Keep customers happy to earn points</li>
                         <li>Upgrade your kitchen equipment</li>
+                        <li>Press 'F' to prepare food</li>
+                        <li>Press 'S' to serve customers</li>
                     </ul>
                 </div>
                 <div id="adventurer-desc" class="role-description" style="display:none;">
@@ -98,8 +100,9 @@
                     <ul>
                         <li>Explore a culinary fantasy world</li>
                         <li>Discover legendary recipes</li>
-                        <li>Battle food monsters</li>
+                        <li>Battle food monsters (Press 'F' to attack)</li>
                         <li>Complete epic cooking quests</li>
+                        <li>Collect ingredients to upgrade your skills</li>
                     </ul>
                 </div>
                 <div class="instructions">
@@ -119,7 +122,7 @@
             // Initialize Kaboom with larger canvas
             const k = kaboom({
                 background: [245, 231, 213],
-                width: 2000,
+                width: 2500,
                 height: 1000,
                 global: false
             });
@@ -147,6 +150,7 @@
                 DOWN,
                 onKeyPress,
                 onKeyDown,
+                onKeyRelease,
                 go,
                 height,
                 width,
@@ -154,7 +158,14 @@
                 destroy,
                 loop,
                 get,
-                onSceneLeave
+                onSceneLeave,
+                wait,
+                camPos,
+                camShake,
+                burp,
+                play,
+                loadSound,
+                outline
             } = k;
 
             // Role selection
@@ -196,6 +207,8 @@
                 loadSprite("stove", "sprites/../stove.png");
                 loadSprite("counter", "sprites/../c4.png");
                 loadSprite("fridge", "sprites/../fridge.png");
+                loadSprite("plate", "sprites/../plate.png");
+                loadSprite("food", "sprites/../food.png");
 
                 // Adventurer-specific sprites
                 loadSprite("quest-giver", "sprites/../c1.png");
@@ -206,19 +219,53 @@
                 loadSprite("forest-tree", "sprites/../tree.png");
                 loadSprite("mountain", "sprites/../mountain.png");
                 loadSprite("castle", "sprites/../castle.png");
+                loadSprite("sword", "sprites/../sword.png");
+
+                // Load sounds
+                loadSound("sizzle", "sounds/sizzle.mp3");
+                loadSound("coin", "sounds/coin.mp3");
+                loadSound("attack", "sounds/attack.mp3");
+                loadSound("hurt", "sounds/hurt.mp3");
 
                 // Define characters and their dialog based on role
                 const chefCharacters = {
-                    "c": { sprite: "customer1", msg: "I'd like a burger, please!" },
-                    "d": { sprite: "customer2", msg: "Can I get a pizza?" },
-                    "e": { sprite: "customer1", msg: "Just a salad for me, thanks!" }
+                    "c": {
+                        sprite: "customer1",
+                        msg: "I'd like a burger, please!",
+                        order: "burger",
+                        patience: 100,
+                        maxPatience: 100
+                    },
+                    "d": {
+                        sprite: "customer2",
+                        msg: "Can I get a pizza?",
+                        order: "pizza",
+                        patience: 100,
+                        maxPatience: 100
+                    },
+                    "e": {
+                        sprite: "customer1",
+                        msg: "Just a salad for me, thanks!",
+                        order: "salad",
+                        patience: 100,
+                        maxPatience: 100
+                    }
                 };
 
                 const adventurerCharacters = {
                     "q": { sprite: "quest-giver", msg: "Find the 5 legendary ingredients!" },
                     "t": { sprite: "treasure", msg: "You found a treasure chest! +50 points" },
                     "i": { sprite: "ingredient", msg: "Rare ingredient found! +20 points" },
-                    "m": { sprite: "monster", msg: "A wild Food Monster appears!" }
+                    "m": {
+                        sprite: "monster",
+                        msg: "A wild Food Monster appears!",
+                        health: 100,
+                        maxHealth: 100,
+                        damage: 15, // Increased damage
+                        speed: 800, // Increased speed
+                        attackCooldown: 1, // Reduced cooldown
+                        chaseRange: 300 // How far they can detect player
+                    }
                 };
 
                 // Define levels for each role
@@ -259,7 +306,7 @@
 
                 // Expanded Adventurer World with 4 unique areas
                 const adventurerLevels = [
-                    // 0 - Culinary Village
+                    // 0 - Culinary Village (fewer monsters)
                     [
                         "-------------------------",
                         "-                       -",
@@ -275,52 +322,46 @@
                         "-                       -",
                         "-------------------------",
                     ],
-                    // 1 - Enchanted Forest
+                    // 1 - Enchanted Forest (more monsters)
                     [
                         "-------------------------",
-                        "-  ^^^^^^^^^^^^^^^^^^^ -",
-                        "-  ^  i     t     q  ^ -",
-                        "-  ^^^^^^^^^^    ^^^^^ -",
-                        "-  ^  ^  ^  ^     ^  ^ -",
-                        "-  P        @        P -",
-                        "-  ^  ^  ^  ^  ^  ^  ^ -",
-                        "-  ^^^^^     ^^^^^^^^^ -",
-                        "-  ^  q     i     m  ^ -",
-                        "-  ^^^^^^^^^^^^^^^^^^^ -",
-                        "-                       -",
-                        "-                       -",
+                        "-  ^^^^^^^^^^^^^^^^^^ ^ -",
+                        "-  ^  i     t     m   ^ -",
+                        "-  ^  m               ^ -",
+                        "-  ^  ^  ^  ^     ^   ^ -",
+                        "-  P        @         P -",
+                        "-  ^                  ^ -",
+                        "-  ^  m               ^ -",
+                        "-  ^  q     i     m   ^ -",
+                        "-  ^^^^^^^^^^^^^^^^^^^  -",
                         "-------------------------",
                     ],
-                    // 2 - Spice Mountains
+                    // 2 - Spice Mountains (dangerous area)
                     [
                         "-------------------------",
                         "-  MMMMMMMMMMMMMMMMMMM -",
-                        "-  M  t  M  i  M  q  M -",
-                        "-  MM                M -",
-                        "-  M                 M -",
-                        "-  P           @     P -",
-                        "-  M              M  M -",
-                        "-  MMM              MM -",
-                        "-  M  m  M  i  M  t  M -",
-                        "-  MMMMMMMMMMMMMMMMMMM -",
-                        "-                       -",
-                        "-                       -",
+                        "-  M  t  M  i  M  m   M -",
+                        "-  MM    m           M -",
+                        "-  M        m        M -",
+                        "-  P           @      P -",
+                        "-  M              M   M -",
+                        "-     m                -",
+                        "-  M  m  M  i  M  m   M -",
+                        "-  MMMMMMMMMMMMMMMMMM M -",
                         "-------------------------",
                     ],
-                    // 3 - Royal Kitchen Castle
+                    // 3 - Royal Kitchen Castle (boss area)
                     [
                         "-------------------------",
-                        "-  CCCCCCCCCCCCCCCCCCC -",
-                        "-  C  q  C  t  C  i  C -",
-                        "-  CCCCCCCCCCCCCCCCCCC -",
-                        "-  C  C  C  C  C  C  C -",
-                        "-  P  C  C  @  C  C  P -",
-                        "-  C  C  C  C  C  C  C -",
-                        "-  CCCCCCCCCCCCCCCCCCC -",
-                        "-  C  i  C  t  C  m  C -",
-                        "-  CCCCCCCCCCCCCCCCCCC -",
+                        "-  CCCCCCCCCCCCCCCCC    -",
+                        "-  C  q  C  t  C  m  C  -",
+                        "-     m                -",
+                        "-           m           -",
+                        "-  P  C  C  @  C  C   P -",
                         "-                       -",
-                        "-                       -",
+                        "-     m         m       -",
+                        "-  C  i  C  t  C  m  C  -",
+                        "-  CCCCCCCCCCCCCCCCCCC  -",
                         "-------------------------",
                     ]
                 ];
@@ -331,6 +372,23 @@
                 let playerRole = role;
                 let ingredientsCollected = 0;
                 const totalIngredientsNeeded = 5;
+
+                // Chef-specific variables
+                let preparedFood = null;
+                let customerOrders = [];
+                let kitchenUpgrades = {
+                    stove: 1,
+                    fridge: 1,
+                    counter: 1
+                };
+
+                // Adventurer-specific variables
+                let playerHealth = 100;
+                let playerMaxHealth = 100;
+                let playerDamage = 20;
+                let playerAttackCooldown = 0;
+                let monsters = [];
+                let attackHitbox = null;
 
                 // Main game scene
                 scene("main", (levelIdx) => {
@@ -362,7 +420,12 @@
                                 area(),
                                 body(),
                                 "player",
-                                scale(0.5)
+                                scale(0.5),
+                                {
+                                    facing: "down",
+                                    isAttacking: false,
+                                    attackCooldown: 0
+                                }
                             ],
                             // Chef-specific objects
                             "S": playerRole === "chef" ? () => [
@@ -371,7 +434,10 @@
                                 body({ isStatic: true }),
                                 "kitchen-equipment",
                                 scale(0.6),
-                                "stove"
+                                "stove",
+                                {
+                                    upgradeLevel: kitchenUpgrades.stove
+                                }
                             ] : undefined,
                             "C": playerRole === "chef" ? () => [
                                 sprite("counter"),
@@ -379,7 +445,10 @@
                                 body({ isStatic: true }),
                                 "kitchen-equipment",
                                 scale(0.6),
-                                "counter"
+                                "counter",
+                                {
+                                    upgradeLevel: kitchenUpgrades.counter
+                                }
                             ] : undefined,
                             "F": playerRole === "chef" ? () => [
                                 sprite("fridge"),
@@ -387,7 +456,10 @@
                                 body({ isStatic: true }),
                                 "kitchen-equipment",
                                 scale(0.6),
-                                "fridge"
+                                "fridge",
+                                {
+                                    upgradeLevel: kitchenUpgrades.fridge
+                                }
                             ] : undefined,
                             // Adventurer-specific objects
                             "P": playerRole === "adventurer" ? () => [
@@ -396,7 +468,10 @@
                                 body({ isStatic: true }),
                                 "portal",
                                 scale(0.6),
-                                { targetLevel: (levelIdx + 1) % adventurerLevels.length }
+                                {
+                                    targetLevel: (levelIdx + 1) % adventurerLevels.length,
+                                    isActive: true
+                                }
                             ] : undefined,
                             "^": playerRole === "adventurer" ? () => [
                                 sprite("forest-tree"),
@@ -423,7 +498,7 @@
                         wildcardTile(ch) {
                             const char = characters[ch];
                             if (char) {
-                                return [
+                                const components = [
                                     sprite(char.sprite),
                                     area(),
                                     body({ isStatic: true }),
@@ -433,6 +508,34 @@
                                         type: ch
                                     },
                                 ];
+
+                                // Add monster-specific components
+                                if (char.health) {
+                                    components.push({
+                                        health: char.health,
+                                        maxHealth: char.maxHealth,
+                                        damage: char.damage,
+                                        speed: char.speed,
+                                        attackCooldown: char.attackCooldown,
+                                        chaseRange: char.chaseRange,
+                                        lastAttackTime: 0,
+                                        isAggressive: true,
+                                        isAlive: true
+                                    });
+                                }
+
+                                // Add customer-specific components
+                                if (char.patience) {
+                                    components.push({
+                                        order: char.order,
+                                        patience: char.patience,
+                                        maxPatience: char.maxPatience,
+                                        isWaiting: true,
+                                        isServed: false
+                                    });
+                                }
+
+                                return components;
                             }
                         },
                     });
@@ -440,24 +543,30 @@
                     // Get the player object
                     const player = level.get("player")[0];
 
-                    // Dialog system
+                    // Improved Dialog system with better visibility
                     function addDialog() {
-                        const h = 120;
-                        const pad = 16;
+                        const h = 150; // Taller dialog box
+                        const pad = 30; // More padding
                         const bg = add([
                             pos(0, height() - h),
                             rect(width(), h),
-                            color(0, 0, 0, 200),
+                            color(0, 0, 0, 0.9), // More opaque background
                             z(100),
+                            fixed()
                         ]);
                         const txt = add([
                             text("", {
                                 width: width() - pad * 2,
-                                size: 18
+                                size: 32, // Larger font size
+                                font: "sans-serif",
+                                align: "center", // Center aligned text
                             }),
-                            pos(pad, height() - h + pad),
+                            pos(width()/2, height() - h + pad),
+                            anchor("center"),
+                            color(255, 255, 255), // White text
+                            outline(4, color(0, 0, 0)), // Black outline for better contrast
                             z(100),
-                            color(255, 255, 255),
+                            fixed()
                         ]);
                         bg.hidden = true;
                         txt.hidden = true;
@@ -490,11 +599,41 @@
                         fixed()
                     ]);
 
+                    // Health display (for adventurer)
+                    if (playerRole === "adventurer") {
+                        const healthDisplay = add([
+                            text(`Health: ${playerHealth}/${playerMaxHealth}`, { size: 24 }),
+                            pos(20, 60),
+                            color(0, 0, 0),
+                            z(50),
+                            fixed()
+                        ]);
+                    }
+
                     // Adventurer-specific displays
                     if (playerRole === "adventurer") {
                         const ingredientDisplay = add([
                             text(`Ingredients: ${ingredientsCollected}/${totalIngredientsNeeded}`, { size: 24 }),
+                            pos(20, 100),
+                            color(0, 0, 0),
+                            z(50),
+                            fixed()
+                        ]);
+                    }
+
+                    // Chef-specific displays
+                    if (playerRole === "chef") {
+                        const ordersDisplay = add([
+                            text(`Orders: ${customerOrders.length}`, { size: 24 }),
                             pos(20, 60),
+                            color(0, 0, 0),
+                            z(50),
+                            fixed()
+                        ]);
+
+                        const upgradesDisplay = add([
+                            text(`Stove: Lvl ${kitchenUpgrades.stove} | Fridge: Lvl ${kitchenUpgrades.fridge} | Counter: Lvl ${kitchenUpgrades.counter}`, { size: 20 }),
+                            pos(20, 100),
                             color(0, 0, 0),
                             z(50),
                             fixed()
@@ -510,27 +649,53 @@
                             if (character.type === "t") { // Treasure
                                 score += 50;
                                 scoreDisplay.text = `Adventure Score: ${score}`;
+                                play("coin");
                                 destroy(character);
                             } else if (character.type === "i") { // Ingredient
                                 score += 20;
                                 ingredientsCollected++;
                                 scoreDisplay.text = `Adventure Score: ${score}`;
+                                play("coin");
                                 destroy(character);
 
                                 // Check if all ingredients collected
                                 if (ingredientsCollected >= totalIngredientsNeeded) {
                                     dialog.say("Congratulations! You found all legendary ingredients!");
+                                    playerMaxHealth += 50;
+                                    playerDamage += 10;
                                 }
                             } else if (character.type === "m") { // Monster
-                                // Simple battle system
-                                const battleOutcome = Math.random() > 0.3; // 70% chance to win
-                                if (battleOutcome) {
-                                    score += 30;
-                                    scoreDisplay.text = `Adventure Score: ${score}`;
-                                    dialog.say("You defeated the Food Monster! +30 points");
-                                    destroy(character);
-                                } else {
-                                    dialog.say("The Food Monster got away... Try again!");
+                                // Monster interaction handled in combat system
+                            }
+                        }
+
+                        // Chef-specific interactions
+                        if (playerRole === "chef") {
+                            if (character.type === "c" || character.type === "d" || character.type === "e") {
+                                // Take customer order
+                                if (character.isWaiting && !character.isServed) {
+                                    customerOrders.push({
+                                        type: character.order,
+                                        customer: character
+                                    });
+                                    dialog.say(`Order taken: ${character.order}`);
+                                }
+
+                                // Serve customer
+                                if (preparedFood && preparedFood.type === character.order && !character.isServed) {
+                                    character.isServed = true;
+                                    character.isWaiting = false;
+                                    score += 50 * kitchenUpgrades.counter;
+                                    scoreDisplay.text = `Restaurant Score: ${score}`;
+                                    play("coin");
+                                    destroy(preparedFood);
+                                    preparedFood = null;
+                                    dialog.say(`Customer served! +${50 * kitchenUpgrades.counter} points`);
+
+                                    // Customer leaves after being served
+                                    wait(2, () => {
+                                        destroy(character);
+                                    });
                                 }
                             }
                         }
@@ -539,11 +704,11 @@
                     if (playerRole === "chef") {
                         player.onCollide("kitchen-equipment", (equipment) => {
                             if (equipment.sprite === "stove") {
-                                dialog.say("Time to cook some food!");
+                                dialog.say("Time to cook some food! Press 'F' to prepare a dish");
                             } else if (equipment.sprite === "counter") {
                                 dialog.say("Place prepared dishes here for serving");
                             } else if (equipment.sprite === "fridge") {
-                                dialog.say("Get fresh ingredients from here");
+                                dialog.say("Get fresh ingredients from here. Press 'E' to upgrade (Cost: 200)");
                             }
                         });
                     }
@@ -551,7 +716,9 @@
                     // Portals for adventurer to switch between areas
                     if (playerRole === "adventurer") {
                         player.onCollide("portal", (portal) => {
-                            go("main", portal.targetLevel);
+                            if (portal.isActive) {
+                                go("main", portal.targetLevel);
+                            }
                         });
                     } else {
                         // Door for chef to switch between kitchen and dining
@@ -586,18 +753,228 @@
                         "up": UP,
                         "down": DOWN,
                     };
+
                     for (const dir in dirs) {
-                        onKeyPress(dir, () => dialog.dismiss());
+                        onKeyPress(dir, () => {
+                            dialog.dismiss();
+                            player.facing = dir;
+                        });
                         onKeyDown(dir, () => player.move(dirs[dir].scale(SPEED)));
                     }
 
+                    // Combat system for adventurer
+                    if (playerRole === "adventurer") {
+                        // Attack with 'F' key
+                        onKeyPress("f", () => {
+                            if (player.isAttacking || player.attackCooldown > 0) return;
+
+                            player.isAttacking = true;
+                            play("attack");
+
+                            // Create attack hitbox based on facing direction
+                            const offset = {
+                                left: vec2(-50, 0),
+                                right: vec2(50, 0),
+                                up: vec2(0, -50),
+                                down: vec2(0, 50)
+                            }[player.facing];
+
+                            attackHitbox = add([
+                                sprite("sword"),
+                                pos(player.pos.add(offset)),
+                                area(),
+                                "attack",
+                                {
+                                    damage: playerDamage,
+                                    lifespan: 0.2,
+                                    timer: 0
+                                },
+                                scale(0.5),
+                                z(10)
+                            ]);
+
+                            // Set cooldown
+                            player.attackCooldown = 0.5;
+
+                            // End attack after short time
+                            wait(0.2, () => {
+                                player.isAttacking = false;
+                                if (attackHitbox) {
+                                    destroy(attackHitbox);
+                                    attackHitbox = null;
+                                }
+                            });
+                        });
+
+                        // Monster behavior
+                        const monsters = level.get("character").filter(c => c.type === "m");
+                        monsters.forEach(monster => {
+                            // More aggressive monster movement towards player
+                            loop(0.1, () => { // More frequent updates
+                                if (!monster.isAlive) return;
+
+                                // Only chase if player is within range
+                                if (monster.pos.dist(player.pos) < monster.chaseRange) {
+                                    const direction = player.pos.sub(monster.pos).unit();
+                                    monster.move(direction.scale(monster.speed));
+                                }
+                            });
+
+                            // Monster attacks more frequently
+                            loop(0.1, () => {
+                                if (!monster.isAlive || monster.attackCooldown > 0) return;
+
+                                if (monster.pos.dist(player.pos) < 80) {
+                                    playerHealth -= monster.damage;
+                                    play("hurt");
+                                    camShake(5);
+                                    monster.attackCooldown = monster.attackCooldown;
+
+                                    // Update health display
+                                    get("health-display").forEach(h => {
+                                        h.text = `Health: ${playerHealth}/${playerMaxHealth}`;
+                                    });
+
+                                    if (playerHealth <= 0) {
+                                        dialog.say("Game Over! Refresh to try again.");
+                                        // Disable player controls
+                                        for (const dir in dirs) {
+                                            onKeyRelease(dir, () => {});
+                                            onKeyDown(dir, () => {});
+                                        }
+                                    }
+                                }
+                            });
+
+                            // Monster takes damage
+                            monster.onCollide("attack", () => {
+                                if (!monster.isAlive) return;
+
+                                monster.health -= playerDamage;
+                                play("hurt");
+
+                                if (monster.health <= 0) {
+                                    monster.isAlive = false;
+                                    score += 30;
+                                    scoreDisplay.text = `Adventure Score: ${score}`;
+                                    dialog.say("You defeated the Food Monster! +30 points");
+                                    destroy(monster);
+                                }
+                            });
+                        });
+                    }
+
+                    // Chef cooking system
+                    if (playerRole === "chef") {
+                        // Prepare food at stove
+                        onKeyPress("f", () => {
+                            const stove = level.get("stove")[0];
+                            if (stove && player.pos.dist(stove.pos) < 100) {
+                                if (preparedFood) {
+                                    dialog.say("You already have prepared food!");
+                                    return;
+                                }
+
+                                play("sizzle");
+                                preparedFood = add([
+                                    sprite("food"),
+                                    pos(player.pos.x, player.pos.y - 50),
+                                    area(),
+                                    "food",
+                                    {
+                                        type: ["burger", "pizza", "salad"][Math.floor(Math.random() * 3)],
+                                        isPrepared: true
+                                    },
+                                    scale(0.4)
+                                ]);
+
+                                dialog.say(`Prepared a ${preparedFood.type}! Take it to the counter`);
+                            }
+                        });
+
+                        // Place food on counter
+                        onKeyPress("s", () => {
+                            const counter = level.get("counter")[0];
+                            if (counter && preparedFood && player.pos.dist(counter.pos) < 100) {
+                                preparedFood.pos = counter.pos.add(vec2(0, -30));
+                                dialog.say(`Food placed on counter: ${preparedFood.type}`);
+                            }
+                        });
+
+                        // Upgrade equipment
+                        onKeyPress("e", () => {
+                            const fridge = level.get("fridge")[0];
+                            if (fridge && player.pos.dist(fridge.pos) < 100) {
+                                if (score >= 200) {
+                                    score -= 200;
+                                    kitchenUpgrades.fridge++;
+                                    scoreDisplay.text = `Restaurant Score: ${score}`;
+                                    play("coin");
+                                    dialog.say(`Fridge upgraded to level ${kitchenUpgrades.fridge}!`);
+
+                                    // Update upgrades display
+                                    get("upgrades-display").forEach(u => {
+                                        u.text = `Stove: Lvl ${kitchenUpgrades.stove} | Fridge: Lvl ${kitchenUpgrades.fridge} | Counter: Lvl ${kitchenUpgrades.counter}`;
+                                    });
+                                } else {
+                                    dialog.say("Not enough points to upgrade! (Need 200)");
+                                }
+                            }
+                        });
+
+                        // Customer patience system
+                        const customers = level.get("character").filter(c =>
+                            c.type === "c" || c.type === "d" || c.type === "e"
+                        );
+
+                        customers.forEach(customer => {
+                            loop(1, () => {
+                                if (customer.isWaiting && !customer.isServed) {
+                                    customer.patience -= 5;
+
+                                    if (customer.patience <= 0) {
+                                        score -= 20;
+                                        scoreDisplay.text = `Restaurant Score: ${score}`;
+                                        dialog.say("Customer left unhappy! -20 points");
+                                        destroy(customer);
+                                    }
+                                }
+                            });
+                        });
+                    }
+
+                    // Cooldown system
+                    loop(0.1, () => {
+                        if (player.attackCooldown > 0) {
+                            player.attackCooldown -= 0.1;
+                        }
+
+                        // Update attack hitbox position
+                        if (attackHitbox) {
+                            const offset = {
+                                left: vec2(-50, 0),
+                                right: vec2(50, 0),
+                                up: vec2(0, -50),
+                                down: vec2(0, 50)
+                            }[player.facing];
+
+                            attackHitbox.pos = player.pos.add(offset);
+                            attackHitbox.timer += 0.1;
+
+                            if (attackHitbox.timer >= attackHitbox.lifespan) {
+                                destroy(attackHitbox);
+                                attackHitbox = null;
+                            }
+                        }
+                    });
+
                     // Display area name
-                    const chefAreaNames = ["Main Dining Area", "Kitchen"];
+                    const chefAreaNames = [" ", " "];
                     const adventurerAreaNames = [
-                        "Culinary Village",
-                        "Enchanted Forest",
-                        "Spice Mountains",
-                        "Royal Kitchen Castle"
+                        " ",
+                        " ",
+                        " ",
+                        " "
                     ];
 
                     add([
@@ -613,6 +990,9 @@
                         z(50),
                         fixed()
                     ]);
+
+                    // Camera follows player
+                    camPos(player.pos);
                 });
 
                 // Start the game
