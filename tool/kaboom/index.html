@@ -95,6 +95,7 @@
                         <li>Press '2' to prepare a Pizza</li>
                         <li>Press '3' to prepare a Salad</li>
                         <li>Press 'S' to serve customers</li>
+                        <li>Press 'E' to take customer orders</li>
                     </ul>
                 </div>
                 <div id="adventurer-desc" class="role-description" style="display:none;">
@@ -535,8 +536,9 @@
                                         order: char.order,
                                         patience: char.patience,
                                         maxPatience: char.maxPatience,
-                                        isWaiting: true,
-                                        isServed: false
+                                        isWaiting: false, // Changed to false initially
+                                        isServed: false,
+                                        hasOrder: false // New property to track if order was taken
                                     });
                                 }
 
@@ -673,37 +675,6 @@
                                 // Monster interaction handled in combat system
                             }
                         }
-
-                        // Chef-specific interactions
-                        if (playerRole === "chef") {
-                            if (character.type === "c" || character.type === "d" || character.type === "e") {
-                                // Take customer order
-                                if (character.isWaiting && !character.isServed) {
-                                    customerOrders.push({
-                                        type: character.order,
-                                        customer: character
-                                    });
-                                    dialog.say(`Order taken: ${character.order}`);
-                                }
-
-                                // Serve customer
-                                if (preparedFood && preparedFood.type === character.order && !character.isServed) {
-                                    character.isServed = true;
-                                    character.isWaiting = false;
-                                    score += 50 * kitchenUpgrades.counter;
-                                    scoreDisplay.text = `Restaurant Score: ${score}`;
-                                    play("coin");
-                                    destroy(preparedFood);
-                                    preparedFood = null;
-                                    dialog.say(`Customer served! +${50 * kitchenUpgrades.counter} points`);
-
-                                    // Customer leaves after being served
-                                    wait(2, () => {
-                                        destroy(character);
-                                    });
-                                }
-                            }
-                        }
                     });
 
                     if (playerRole === "chef") {
@@ -765,6 +736,102 @@
                             player.facing = dir;
                         });
                         onKeyDown(dir, () => player.move(dirs[dir].scale(SPEED)));
+                    }
+
+                    // Take customer orders with 'E' key (Chef only)
+                    if (playerRole === "chef") {
+                        onKeyPress("e", () => {
+                            const customers = level.get("character").filter(c =>
+                                c.type === "c" || c.type === "d" || c.type === "e"
+                            );
+
+                            // Find the nearest customer in range
+                            let nearestCustomer = null;
+                            let minDist = Infinity;
+
+                            customers.forEach(customer => {
+                                const dist = player.pos.dist(customer.pos);
+                                if (dist < 100 && dist < minDist) {
+                                    nearestCustomer = customer;
+                                    minDist = dist;
+                                }
+                            });
+
+                            if (nearestCustomer && !nearestCustomer.hasOrder && !nearestCustomer.isWaiting) {
+                                // Take the order
+                                nearestCustomer.isWaiting = true;
+                                nearestCustomer.hasOrder = true;
+                                customerOrders.push({
+                                    type: nearestCustomer.order,
+                                    customer: nearestCustomer
+                                });
+                                dialog.say(`Order taken: ${nearestCustomer.order}`);
+
+                                // Start patience timer
+                                loop(1, () => {
+                                    if (nearestCustomer.isWaiting && !nearestCustomer.isServed) {
+                                        nearestCustomer.patience -= 5;
+
+                                        if (nearestCustomer.patience <= 0) {
+                                            score -= 20;
+                                            scoreDisplay.text = `Restaurant Score: ${score}`;
+                                            dialog.say("Customer left unhappy! -20 points");
+                                            destroy(nearestCustomer);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+                        // Serve customers with 'S' key
+                        onKeyPress("s", () => {
+                            if (!preparedFood) {
+                                dialog.say("You don't have any prepared food to serve!");
+                                return;
+                            }
+
+                            const customers = level.get("character").filter(c =>
+                                c.type === "c" || c.type === "d" || c.type === "e"
+                            );
+
+                            // Find the nearest waiting customer in range
+                            let nearestCustomer = null;
+                            let minDist = Infinity;
+
+                            customers.forEach(customer => {
+                                const dist = player.pos.dist(customer.pos);
+                                if (customer.isWaiting && !customer.isServed && dist < 100 && dist < minDist) {
+                                    nearestCustomer = customer;
+                                    minDist = dist;
+                                }
+                            });
+
+                            if (nearestCustomer && preparedFood.type === nearestCustomer.order) {
+                                // Serve the customer
+                                nearestCustomer.isServed = true;
+                                nearestCustomer.isWaiting = false;
+                                score += 50 * kitchenUpgrades.counter;
+                                scoreDisplay.text = `Restaurant Score: ${score}`;
+                                play("coin");
+                                destroy(preparedFood);
+                                preparedFood = null;
+                                dialog.say(`Customer served! +${50 * kitchenUpgrades.counter} points`);
+
+                                // Remove the order from the queue
+                                customerOrders = customerOrders.filter(order =>
+                                    order.customer !== nearestCustomer
+                                );
+
+                                // Customer leaves after being served
+                                wait(2, () => {
+                                    destroy(nearestCustomer);
+                                });
+                            } else if (nearestCustomer && preparedFood.type !== nearestCustomer.order) {
+                                dialog.say(`Wrong order! This customer wants a ${nearestCustomer.order}`);
+                            } else {
+                                dialog.say("No waiting customers nearby to serve!");
+                            }
+                        });
                     }
 
                     // Combat system for adventurer
@@ -929,26 +996,6 @@
                                     dialog.say("Not enough points to upgrade! (Need 200)");
                                 }
                             }
-                        });
-
-                        // Customer patience system
-                        const customers = level.get("character").filter(c =>
-                            c.type === "c" || c.type === "d" || c.type === "e"
-                        );
-
-                        customers.forEach(customer => {
-                            loop(1, () => {
-                                if (customer.isWaiting && !customer.isServed) {
-                                    customer.patience -= 5;
-
-                                    if (customer.patience <= 0) {
-                                        score -= 20;
-                                        scoreDisplay.text = `Restaurant Score: ${score}`;
-                                        dialog.say("Customer left unhappy! -20 points");
-                                        destroy(customer);
-                                    }
-                                }
-                            });
                         });
                     }
 
