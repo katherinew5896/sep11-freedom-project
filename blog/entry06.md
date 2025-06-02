@@ -42,8 +42,104 @@ There is also instructions on each role.
                     </ul>
                 </div>
 `````
+And the basic instructions on movement.  
+````` js
+ <div class="instructions">
+                    <h4>How to Play:</h4>
+                    <ul>
+                        <li>Use arrow keys to move your character</li>
+                        <li>Press 'E' to interact with objects and people</li>
+                        <li>Switch between areas using doors/portals</li>
+                    </ul>
+`````
+This const code would make kaboom functions available globally.  
+`````js
+ const {
+                loadSprite,
+                scene,
+                addLevel,
+                rect,
+                color,
+                area,
+                body,
+                sprite,
+                scale,
+                text,
+                pos,
+                vec2,
+                z,
+                fixed,
+                anchor,
+                LEFT,
+                RIGHT,
+                UP,
+                DOWN,
+                onKeyPress,
+                onKeyDown,
+                onKeyRelease,
+                go,
+                height,
+                width,
+                add,
+                destroy,
+                loop,
+                get,
+                onSceneLeave,
+                wait,
+                camPos,
+                camShake,
+                burp,
+                play,
+                loadSound,
+                outline
+            } = k;
+`````
+Then using sprites to place everything into the game like characters, items, and text.  
+````` js
+function startGame(role) {
+                // Load sprites
+                loadSprite("chef", "sprites/../c.png");
+                loadSprite("adventurer", "sprites/../c.png");
+                loadSprite("customer1", "sprites/../c1.png");
+                loadSprite("customer2", "sprites/../c3.png");
+``````
+By using const again I can place down a map of tables and characters.  
+````` js
+   const chefLevels = [
+                    // Dining Area
+                    [
+                        "---------------------",
+                        "-                   -",
+                        "-  c      d       e -",
+                        "-  T      T       T -",
+                        "-                   -",
+                        "-                   -",
+                        "-         @         -",
+                        "-                   -",
+                        "-                   -",
+                        "-  T     T        T -",
+                        "-                   -",
+                        "-                   -",
+                        "---------------------",
+                    ],
+`````
 
-
+This next code is for monsters attacking the player when in adventure mode.  
+````` js
+if (char.health) {
+                                    components.push({
+                                        health: char.health,
+                                        maxHealth: char.maxHealth,
+                                        damage: char.damage,
+                                        speed: char.speed,
+                                        attackCooldown: char.attackCooldown,
+                                        chaseRange: char.chaseRange,
+                                        lastAttackTime: 0,
+                                        isAggressive: true,
+                                        isAlive: true
+                                    });
+                                }
+`````
 
 
 
