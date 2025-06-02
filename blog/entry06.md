@@ -2,7 +2,7 @@
 ##### 6/1/25
 
 ## context
-During this part of the year I have finished my freedom project with my partner and we have finished our mvp and beyond mvp. We have also presented our project at the expo. Explaing each step of the project from start to finish. Our project is composed of kaboom.js and a topic about a cooking game. I learned the main functions of kaboom.js on the [kaboom website](https://kaboomjs.com/), on the playground. I spent a lot of time learning how each code runs together to create the final game. But also having used prior codes like functions and loops I can expand this game and its functions into a more exciting game with options for players to choose from.
+During this part of the year I have finished my freedom project with my partner and we have finished our mvp and beyond mvp. We have also presented our project at the expo with these [slides](https://docs.google.com/presentation/d/1I7DhBuQJP0BuV2XR532SJXRRB0XofwneNnzXnazd_aU/edit?slide=id.p#slide=id.p)Explaing each step of the project from start to finish, but shortened it with an [elevator pitch](https://docs.google.com/document/d/1-lgzP7K8CmKBgsjgY4cMFvLfvLTIZefJRRvoIbQveG4/edit?tab=t.0) Our project is composed of kaboom.js and a topic about a cooking game. I learned the main functions of kaboom.js on the [kaboom website](https://kaboomjs.com/), on the playground. I spent a lot of time learning how each code runs together to create the final game. But also having used prior codes like functions and loops I can expand this game and its functions into a more exciting game with options for players to choose from.
 
 ## Code of game
 This is what you would see at the menu screen and you would have to pick one.  
@@ -140,7 +140,8 @@ if (char.health) {
                                     });
                                 }
 `````
-
+## takeaways
+1. My first takeaway
 
 
 
