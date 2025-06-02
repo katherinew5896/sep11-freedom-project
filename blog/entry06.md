@@ -142,8 +142,12 @@ if (char.health) {
 `````
 ## takeaways on elevator pitch
 1. My first takeaway is how much work it would need for me to include the highlights of my project and code within a minute. Because people have a pretty short attention span I needed to hook them in with something interesting that they would know of. But also later on explain my process and what I had used to create this project. Overall it is better to just add the highlights of the presentation since explaining a certain code won't matter too much rather than explaining the process and challenges I faced and learned from.
-2. My second takeaway is to prepare the elevator pitch because sometimes you never know
+2. My second takeaway is to rehearse the elevator pitch because sometimes you never know if you are going over 1 minute or under. Also sometimes we forget to say things we are supposed to say since the judges are literally judging you right in front of you, so it may get a little wonky when you are explaining and you don't want to go back and forth saying random things when you could have been saying something useful for judges.
 
+## takeaways from in class presentations
+1. My first takeaway is making eye contact because since I was presenting to my classmates I felt very used to seeing them everyday and just forget to look into their faces while presenting. This is not helpful for when presenting with different people outside of my class and people my age. I need to practice looking at people straight into their eyes without any thought of what I look like while doing it or else I can never look at people when presenting which is a real problem in real scenarios.
+2. My second takeaway is speaking loudly and in a less boring voice. I often think too deep into the presentation and speak like a robot while trying to remember to stick to the script, that I sound very boring and shaky when presenting. This can lead to my classmates or judges not having really any interest in my project. I need to practice on my tone and energy because that is what catches peoples attentions and has them hooked and stay for the rest of the presentation.
+3. My third takeaway is adding more onto my slides or making more slides because when I am presenting I tend to go really fast and end my presentation as soon as possible to get it over with. But that is not good because when I am going really fast, people are not too focused and think that its really short when it feels really long for me. My slides should contain more in depth of what challenges I had and a closer look into my code for an idea of Kaboom or how something works. Presenting is about sharing something that I learned to others so that they also gain that knowledge.
 
 
 
