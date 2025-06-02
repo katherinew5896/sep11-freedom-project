@@ -140,8 +140,9 @@ if (char.health) {
                                     });
                                 }
 `````
-## takeaways
-1. My first takeaway
+## takeaways on elevator pitch
+1. My first takeaway is how much work it would need for me to include the highlights of my project and code within a minute. Because people have a pretty short attention span I needed to hook them in with something interesting that they would know of. But also later on explain my process and what I had used to create this project. Overall it is better to just add the highlights of the presentation since explaining a certain code won't matter too much rather than explaining the process and challenges I faced and learned from.
+2. My second takeaway is to prepare the elevator pitch because sometimes you never know
 
 
 
